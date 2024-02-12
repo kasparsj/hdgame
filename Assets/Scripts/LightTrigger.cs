@@ -20,9 +20,9 @@ public class Script : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Transform siblingTransform = transform.parent.Find("Cord");
-            if (siblingTransform != null) {
-                siblingTransform.gameObject.SetActive(true);
+            Transform cordTransform = transform.parent.Find("Cord");
+            if (cordTransform != null) {
+                cordTransform.gameObject.SetActive(true);
             }
             GetComponentInParent<LightManager>().ParentOnTriggerEnter(other);
         }
