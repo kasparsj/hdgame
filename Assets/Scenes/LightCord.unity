@@ -1231,11 +1231,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1950991baab9246b130b14af7eb823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 7440689405894522010, guid: 4c5fbf23efa3818468c129c6f7e96607, type: 3}
-  _radius: 500
+  _prefab: {fileID: 1224511279}
+  _radius: 250
   _edges: 7
-  _intensity: 5000
-  _color: {r: 1, g: 0, b: 0, a: 1}
+  _intensity: 4000
+  _color: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &655764331
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,6 +2124,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &1224511279 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 7440689405894522010, guid: 4c5fbf23efa3818468c129c6f7e96607,
+    type: 3}
+  m_PrefabInstance: {fileID: 656136529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1312382684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,11 +2328,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1950991baab9246b130b14af7eb823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 7440689405894522010, guid: 4c5fbf23efa3818468c129c6f7e96607, type: 3}
-  _radius: 250
+  _prefab: {fileID: 1224511279}
+  _radius: 450
   _edges: 7
-  _intensity: 5000
-  _color: {r: 0, g: 1, b: 0, a: 1}
+  _intensity: 4000
+  _color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!64 &1675701489
 MeshCollider:
   m_ObjectHideFlags: 0

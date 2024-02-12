@@ -23,9 +23,17 @@ public class LightGrid : MonoBehaviour
             var go = Instantiate(_prefab, transform);
             go.transform.localPosition = pointOnEllipse(Mathf.PI * 2 / 7 * i, _radius, _radius);
             go.transform.localRotation = Quaternion.identity;
-            go.GetComponentInChildren<LightManager>().color = _color;
-            go.GetComponentInChildren<LightManager>().intensity = _intensity;
-            _lights.Add(go.GetComponent<Light>());
+
+            Light light = go.GetComponent<Light>();
+            LightManager lightManager = light.GetComponent<LightManager>();
+            if (lightManager != null) {
+                lightManager.color = _color;
+                lightManager.intensity = _intensity;
+            }
+            else {
+                Debug.Log("LightManager not found");
+            }
+            _lights.Add(light);
         }
     }
 
