@@ -1,0 +1,30 @@
+{
+  "scopedRegistries": [
+    {
+      "name": "Keijiro",
+      "url": "https://registry.npmjs.com",
+      "scopes": [
+        "jp.keijiro"
+      ]
+    }
+  ],
+  "dependencies": {
+    "com.unity.ai.navigation": "1.1.5",
+    "com.unity.ide.vscode": "1.2.5",
+    "com.unity.render-pipelines.high-definition": "14.0.10",
+    "com.unity.timeline": "1.7.6",
+    "jp.keijiro.danish-statues": "1.0.0",
+    "jp.keijiro.hdrpextra.sky": "1.0.0",
+    "jp.keijiro.klak.math": "2.1.0",
+    "jp.keijiro.klak.motion": "1.1.0",
+    "jp.keijiro.klak.timeline.procedural-motion": "1.0.2",
+    "jp.keijiro.lasp": "2.1.6",
+    "jp.keijiro.neolowman": "1.0.0",
+    "jp.keijiro.noiseshader": "2.0.0",
+    "jp.keijiro.test-assets": "1.0.1",
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0",
+    "com.unity.modules.xr": "1.0.0"
+  }
+}
