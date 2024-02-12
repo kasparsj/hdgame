@@ -25,11 +25,6 @@ public class Script : MonoBehaviour
                 siblingTransform.gameObject.SetActive(true);
             }
             GetComponentInParent<LightManager>().ParentOnTriggerEnter(other);
-            
-            LightGrid grid = GetComponentInParent<LightGrid>();
-            if (grid != null) {
-                GetComponentInParent<LightGrid>().ParentOnTriggerEnter(other);
-            }
         }
     }
 }

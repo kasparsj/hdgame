@@ -5,44 +5,56 @@ using Unity.Mathematics;
 public class LightGrid : MonoBehaviour
 {
     [SerializeField] Light _prefab = null;
-    [SerializeField] int _radius = 50;
-    [SerializeField] int _edges = 7;
+    [SerializeField] int _rows = 5;
+    [SerializeField] int _columns = 5;
     [SerializeField] float _intensity = 1;
-    [SerializeField] Color _color = new Color(1, 1, 1);
+    [SerializeField] float _interval = 0.2f;
 
     List<Light> _lights = new List<Light>();
 
-    Vector3 pointOnEllipse(float rad, float w, float h) {
-        return new Vector3(math.cos(rad) * w / 2, math.sin(rad) * h / 2);
-    }
-
     void Start()
     {
-        for (var i = 0; i < _edges; i++)
+        for (var y = 0; y < _rows; y++)
         {
-            var go = Instantiate(_prefab, transform);
-            go.transform.localPosition = pointOnEllipse(Mathf.PI * 2 / 7 * i, _radius, _radius);
-            go.transform.localRotation = Quaternion.identity;
+            for (var x = 0; x < _columns; x++)
+            {
+                var px = (x - (_columns - 0.5f) / 2) * _interval;
+                var py = (y - (_rows    - 0.5f) / 2) * _interval;
 
-            Light light = go.GetComponent<Light>();
-            LightManager lightManager = light.GetComponent<LightManager>();
-            if (lightManager != null) {
-                lightManager.color = _color;
-                lightManager.intensity = _intensity;
+                var go = Instantiate(_prefab, transform);
+                go.transform.localPosition = new Vector3(px, py, 0);
+                go.transform.localRotation = Quaternion.identity;
+
+                var light = go.GetComponent<Light>();
+                var lightManager = light.GetComponent<LightManager>();
+                if (lightManager != null) {
+                    lightManager.intensity = _intensity;
+                }
+                _lights.Add(light);
             }
-            else {
-                Debug.Log("LightManager not found");
-            }
-            _lights.Add(light);
         }
     }
 
     void Update()
     {
-    }
+        var t = Time.time;
 
-    public void ParentOnTriggerEnter(Collider other)
-    {
-        Debug.Log("trigger");
+        foreach (var l in _lights)
+        {
+            var lightManager = GetComponent<Light>().GetComponent<LightManager>();
+            var p = (float3)l.transform.localPosition;
+            p.z = t;
+
+            var amp = math.saturate(0.5f + noise.snoise(p) * 0.7f);
+
+            var c_r = math.sin(amp * 6.783f + t * 4.324f);
+            var c_g = math.sin(amp * 7.123f + t * 3.138f);
+            var c_b = math.sin(amp * 9.372f + t * 3.749f);
+
+            var col = (Color)((Vector4)(new float4(c_r, c_g, c_b, 1) / 2 + 0.5f));
+            if (lightManager) {
+                lightManager.color = col;
+            }
+        }
     }
 }

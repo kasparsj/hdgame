@@ -36,7 +36,12 @@ public class LightManager : MonoBehaviour
     public void ParentOnTriggerEnter(Collider other)
     {
         if (triggerSound) {
-            AudioManager.Instance.ToggleAudioChannel(triggerSound);
+            AudioManager.Instance.UnmuteAudioChannel(triggerSound);
         }
+
+        // LightGrid grid = GetComponentInParent<LightGrid>();
+        // if (grid != null) {
+        //     GetComponentInParent<LightGrid>().ParentOnTriggerEnter(other);
+        // }
     }
 }

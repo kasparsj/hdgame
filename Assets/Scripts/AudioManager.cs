@@ -37,6 +37,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void UnmuteAudioChannel(AudioSource audioSource)
+    {
+        // todo: check audioSource exists
+        audioSource.mute = false;
+        if (!audioSource.mute && !audioSource.isPlaying) {
+            StartCoroutine(StartAudioSources());
+            StartCoroutine(SyncSources());
+        }
+    }
+
     private IEnumerator StartAudioSources()
     {
         foreach (var source in audioSources)
