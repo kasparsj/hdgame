@@ -7346,7 +7346,7 @@ MonoBehaviour:
   Sync: 01010100
   prefab: {fileID: 7440689405894522010, guid: 2007ce09ccc874d7f8cf65a5a0ca25ab, type: 3}
   radius: 468
-  radius2: 500
+  radius2: 515
   intensity: 100
   color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &1945142608

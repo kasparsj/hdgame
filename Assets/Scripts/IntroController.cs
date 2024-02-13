@@ -73,13 +73,13 @@ public class IntroController : AudioManager, ILightController
     private void tweenToNextPosition(int light) {
         pos += 0.5f;
         var tween = new LocalPositionTween {
-            to = getPosition(pos),
-            duration = 3,
+            to = getPosition(pos + 0.1f),
+            duration = 4,
             onEnd = (instance) => {
                 pos += 0.5f;
                 var tween2 = new LocalPositionTween {
                     to = getPosition(pos),
-                    duration = 3,
+                    duration = 4,
                     onEnd = (instance) => {
                         LightManager lightManager = _lights[light].GetComponent<LightManager>();
                         lightManager.toggleCord(false);
@@ -94,11 +94,11 @@ public class IntroController : AudioManager, ILightController
 
     private void introComplete(int light) {
         var tween = new LocalPositionTween {
-            to = getPosition(pos + 0.1f),
-            duration = 0.5f,
+            to = getPosition(pos + 0.12f),
+            duration = 1,
             onEnd = (instance) => {
                 var tween2 = new LocalPositionTween {
-                    to = new Vector3(0, 0, 0),
+                    to = new Vector3(0, 10, 0),
                     duration = 5,
                     onEnd = (instance) => {
                         LightManager lightManager = _lights[light].GetComponent<LightManager>();
