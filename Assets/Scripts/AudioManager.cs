@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource[] audioSources;
 
     private static AudioManager instance;
+    public bool PlayOnStart = false;
 
     public static AudioManager Instance
     {
@@ -21,6 +22,10 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+        if (PlayOnStart) {
+            StartCoroutine(StartAudioSources());
+            StartCoroutine(SyncSources());
+        }
     }
 
     void Update()
