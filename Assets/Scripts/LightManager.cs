@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class LightManager : MonoBehaviour
 {
+    public int index;
     public Color color;
     public float intensity = 1;
-    public AudioSource triggerSound;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +35,9 @@ public class LightManager : MonoBehaviour
 
     public void ParentOnTriggerEnter(Collider other)
     {
-        if (triggerSound) {
-            AudioManager.Instance.UnmuteAudioChannel(triggerSound);
+        ILightController controller = GetComponentInParent<ILightController>();
+        if (controller != null) {
+            GetComponentInParent<ILightController>().LightOnTriggerEnter(index, other);
         }
-
-        // LightGrid grid = GetComponentInParent<LightGrid>();
-        // if (grid != null) {
-        //     GetComponentInParent<LightGrid>().ParentOnTriggerEnter(other);
-        // }
     }
 }

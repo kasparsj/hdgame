@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 
-public class IntroController : MonoBehaviour
+public class IntroController : AudioManager, ILightController
 {
     public Light prefab = null;
     public int radius = 50;
-    public AudioSource[] audioSources;
     public float intensity = 1;
     public Color color = new Color(1, 1, 1);
 
@@ -19,6 +18,8 @@ public class IntroController : MonoBehaviour
 
     void Start()
     {
+        base.Start();
+
         for (var i=0; i<audioSources.Length; i++) {
             var go = Instantiate(prefab, transform);
             go.transform.localPosition = pointOnEllipse(Mathf.PI * 2 / 7 * i, radius, radius);
@@ -27,9 +28,9 @@ public class IntroController : MonoBehaviour
             Light light = go.GetComponent<Light>();
             LightManager lightManager = light.GetComponent<LightManager>();
             if (lightManager != null) {
+                lightManager.index = i;
                 lightManager.color = color;
                 lightManager.intensity = intensity;
-                lightManager.triggerSound = audioSources[i];
             }
             else {
                 Debug.Log("LightManager not found");
@@ -40,10 +41,20 @@ public class IntroController : MonoBehaviour
 
     void Update()
     {
+        base.Update();
     }
 
-    public void ParentOnTriggerEnter(Collider other)
+    public void LightOnTriggerEnter(int index, Collider other)
     {
-        Debug.Log("trigger");
+        if (audioSources[index]) {
+            UnmuteAudioChannel(audioSources[index]);
+            audioSources[index].volume = 0;
+            StartCoroutine(AudioFade.In(audioSources[index], 0.5f));
+        }
+        if (index == audioSources.Length-1) {
+            for (var i=0; i<2; i++) {
+                StartCoroutine(AudioFade.Out(audioSources[i], 3));
+            }
+        }
     }
 }

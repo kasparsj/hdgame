@@ -5,30 +5,25 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource[] audioSources;
 
-    private static AudioManager instance;
     public bool PlayOnStart = false;
+    public bool PauseOnStart = false;
+    public bool[] Sync;
 
-    public static AudioManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<AudioManager>();
-            }
-            return instance;
-        }
-    }
+    private Coroutine playRoutine;
+    private Coroutine syncRoutine;
 
-    void Start()
+    protected void Start()
     {
         if (PlayOnStart) {
-            StartCoroutine(StartAudioSources());
-            StartCoroutine(SyncSources());
+            playRoutine = StartCoroutine(PlayAudioSources());
+            syncRoutine = StartCoroutine(SyncSources());
+        }
+        if (PauseOnStart) {
+            PauseAudioSources();
         }
     }
 
-    void Update()
+    protected void Update()
     {
     }
 
@@ -36,9 +31,14 @@ public class AudioManager : MonoBehaviour
     {
         // todo: check audioSource exists
         audioSource.mute = !audioSource.mute;
-        if (!audioSource.mute && !audioSource.isPlaying) {
-            StartCoroutine(StartAudioSources());
-            StartCoroutine(SyncSources());
+        if (!audioSource.mute) {
+            if (playRoutine == null) {
+                playRoutine = StartCoroutine(PlayAudioSources());
+                syncRoutine = StartCoroutine(SyncSources());
+            }
+            else if (!audioSource.isPlaying) {
+                audioSource.UnPause();
+            }
         }
     }
 
@@ -46,13 +46,16 @@ public class AudioManager : MonoBehaviour
     {
         // todo: check audioSource exists
         audioSource.mute = false;
-        if (!audioSource.mute && !audioSource.isPlaying) {
-            StartCoroutine(StartAudioSources());
-            StartCoroutine(SyncSources());
+        if (playRoutine == null) {
+            playRoutine = StartCoroutine(PlayAudioSources());
+            playRoutine = StartCoroutine(SyncSources());
+        }
+        else if (!audioSource.isPlaying) {
+            audioSource.UnPause();
         }
     }
 
-    private IEnumerator StartAudioSources()
+    private IEnumerator PlayAudioSources()
     {
         foreach (var source in audioSources)
         {
@@ -65,20 +68,33 @@ public class AudioManager : MonoBehaviour
     {
         while (true)
         {
-            if (audioSources.Length > 0)
-            {
-                // float time = audioSources[0].time;
-                int timeSamples = audioSources[0].timeSamples;
+            AudioSource master = null;
+            int timeSamples = 0;
+            // float time = 0;
 
-                for (int i = 1; i < audioSources.Length; i++)
-                {
-                    // if (Mathf.Abs(audioSources[i].time - time) > 0.01f) {
-                    if (Mathf.Abs(audioSources[i].timeSamples - timeSamples) > 100) {
-                        audioSources[i].timeSamples = timeSamples;
+            for (var i=0; i<audioSources.Length; i++) {
+                if (audioSources[i].isPlaying && Sync.Length > i && Sync[i]) {
+                    if (master == null) {
+                        master = audioSources[i];
+                        // time = master.time;
+                        timeSamples = master.timeSamples;
+                    }
+                    else {
+                        if (Mathf.Abs(audioSources[i].timeSamples - timeSamples) > 100) {
+                            audioSources[i].timeSamples = timeSamples;
+                        }
                     }
                 }
-                yield return null;
             }
+            yield return null;
         }    
+    }
+
+    private void PauseAudioSources()
+    {
+        foreach (var source in audioSources)
+        {
+            source.Pause();
+        }
     }
 }
