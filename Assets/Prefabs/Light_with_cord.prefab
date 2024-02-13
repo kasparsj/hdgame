@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 7440689405894522013}
   - component: {fileID: 7440689405894522012}
   - component: {fileID: 488913135135448288}
+  - component: {fileID: 8734584709183075533}
   m_Layer: 0
   m_Name: Light_with_cord
   m_TagString: Untagged
@@ -330,9 +331,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c162f042ead94f17bc68912c8fcb418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   intensity: 1
-  triggerSound: {fileID: 0}
+--- !u!111 &8734584709183075533
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440689405894522014}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &7440689406606421062
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using Tweens;
 
 public class FieldController : AudioManager, ILightController
 {
@@ -34,8 +35,9 @@ public class FieldController : AudioManager, ILightController
 
     Light createLight(int index, float rad, float radius, Color color)
     {
+        var pos = pointOnEllipse(rad, radius, radius);
         var go = Instantiate(_prefab, transform);
-        go.transform.localPosition = pointOnEllipse(rad, radius, radius);
+        go.transform.localPosition = pos;
         go.transform.localRotation = Quaternion.identity;
 
         Light light = go.GetComponent<Light>();
@@ -44,6 +46,9 @@ public class FieldController : AudioManager, ILightController
             lightManager.index = index;
             lightManager.color = color;
             lightManager.intensity = _intensity;
+        }
+        if (audioSources.Length > index) {
+            audioSources[index].gameObject.transform.localPosition = pos;
         }
         return light;
     }
@@ -57,8 +62,12 @@ public class FieldController : AudioManager, ILightController
     {
         if (audioSources.Length > index) {
             UnmuteAudioChannel(audioSources[index]);
-            audioSources[index].volume = 0;
-            StartCoroutine(AudioFade.In(audioSources[index], 0.5f));
+            var tween = new AudioSourceVolumeTween {
+                from = 0,
+                to = 1,
+                duration = 0.5f,
+            };
+            audioSources[index].gameObject.AddTween(tween);
         }
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class LightManager : MonoBehaviour
 {
-    public int index;
-    public Color color;
+    public int index = 0;
+    public Color color = new Color(1, 1, 1);
     public float intensity = 1;
 
     // Start is called before the first frame update
@@ -30,11 +30,33 @@ public class LightManager : MonoBehaviour
         light.intensity = amp * intensity;
         light.color = col;
 
-        GetComponentInChildren<Renderer>().material.SetColor("_EmissiveColor", col * amp * intensity / 2);
+        var renderer = GetComponentInChildren<Renderer>();
+        if (renderer != null) {
+            renderer.material.SetColor("_EmissiveColor", col * amp * intensity / 2);
+        }
+    }
+
+    public void toggleCord(bool visible)
+    {
+        Transform cordTransform = transform.Find("Cord");
+        if (cordTransform != null) {
+            cordTransform.gameObject.SetActive(visible);
+        }
+    }
+
+    public void toggleSphere(bool visible)
+    {
+        Transform sphereTransform = transform.Find("Sphere");
+        if (sphereTransform != null) {
+            sphereTransform.gameObject.SetActive(visible);
+        }
     }
 
     public void ParentOnTriggerEnter(Collider other)
     {
+        toggleCord(true);
+        toggleSphere(false);
+
         ILightController controller = GetComponentInParent<ILightController>();
         if (controller != null) {
             GetComponentInParent<ILightController>().LightOnTriggerEnter(index, other);

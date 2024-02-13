@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Script : MonoBehaviour
+public class LightTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -18,12 +18,9 @@ public class Script : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        Transform sphereTransform = transform.parent.Find("Sphere");
+        if (sphereTransform != null && sphereTransform.gameObject.activeSelf && other.CompareTag("Player"))
         {
-            Transform cordTransform = transform.parent.Find("Cord");
-            if (cordTransform != null) {
-                cordTransform.gameObject.SetActive(true);
-            }
             GetComponentInParent<LightManager>().ParentOnTriggerEnter(other);
         }
     }
