@@ -1,5 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6619598005478188595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7532062736324549814}
+  - component: {fileID: 5130828120743469782}
+  m_Layer: 0
+  m_Name: Cord
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7532062736324549814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619598005478188595}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7440689405894522015}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5130828120743469782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619598005478188595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07c3020ce973934eb00d2d7de375945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _segmentCount: 3
+  _verticesPerSegment: 10
+  _radius: 1
+  _material: {fileID: 2100000, guid: 23e18b9e57a3b17408ee8c7ec3e5fab0, type: 2}
+  _lissajous:
+    x: 7.11
+    y: 5.53
+    z: 6.75
+  _palette1:
+    x: 0.168
+    y: 0.138
+    z: 0.127
+  _palette2:
+    x: 1.231
+    y: 1.321
+    z: 1.115
+  _noiseFrequency: 3
+  _noiseMotion: 2
+  _noiseAmplitude: 2
+  _lightPrefab: {fileID: 8701441817187180526, guid: 480b3d67fcccdba44a7fa93f3b65579d,
+    type: 3}
 --- !u!1 &7440689405894522014
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,8 +78,9 @@ GameObject:
   - component: {fileID: 7440689405894522013}
   - component: {fileID: 7440689405894522012}
   - component: {fileID: 488913135135448288}
+  - component: {fileID: 8734584709183075533}
   m_Layer: 0
-  m_Name: Light
+  m_Name: Light_Intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +99,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7532062736324549814}
   - {fileID: 7440689406606421063}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -264,9 +331,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c162f042ead94f17bc68912c8fcb418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   intensity: 1
-  triggerSound: {fileID: 0}
+--- !u!111 &8734584709183075533
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440689405894522014}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &7440689406606421062
 GameObject:
   m_ObjectHideFlags: 0

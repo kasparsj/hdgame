@@ -46,9 +46,20 @@ public class LightManager : MonoBehaviour
 
     public void toggleSphere(bool visible)
     {
+        var light = GetComponent<Light>();
+        light.enabled = visible;
+
         Transform sphereTransform = transform.Find("Sphere");
         if (sphereTransform != null) {
             sphereTransform.gameObject.SetActive(visible);
+        }
+    }
+
+    public void toggleBars(bool visible)
+    {
+        Transform barsTransform = transform.Find("Bars");
+        if (barsTransform != null) {
+            barsTransform.gameObject.SetActive(visible);
         }
     }
 

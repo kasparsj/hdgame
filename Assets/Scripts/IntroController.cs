@@ -111,11 +111,14 @@ public class IntroController : AudioManager, ILightController
         };
         _lights[light].gameObject.AddTween(tween);
 
-        var tween3 = new AudioSourceVolumeTween {
-            to = 0,
-            duration = 3,
-        };
         for (var i=0; i<3; i++) {
+            var tween3 = new AudioSourceVolumeTween {
+                to = 0,
+                duration = 3,
+                onEnd = (instance) => {
+                    audioSources[i].Stop();
+                }
+            };
             audioSources[i].gameObject.AddTween(tween3);
         }
     }
