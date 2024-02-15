@@ -1077,8 +1077,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 178863291}
+  - component: {fileID: 178863292}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1104,6 +1105,21 @@ Transform:
   - {fileID: 502121124}
   m_Father: {fileID: 493469158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &178863292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178863290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf7456bcc35c4c139e7815c627da341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 1302764115145884183, guid: 8edb83af45fe44452b70450278085878, type: 3}
+  delayMin: 1
+  delayMax: 5
 --- !u!1 &186640330
 GameObject:
   m_ObjectHideFlags: 0
