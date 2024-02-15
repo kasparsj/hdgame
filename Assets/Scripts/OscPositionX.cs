@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 
-public class OscillatingLightPosition : MonoBehaviour
+public class OscPositionX : MonoBehaviour
 {
-    public float amplitude = 30f; // How far the light moves.
+    public float amplitude = 30f;
     public float speed = 3f;
     private Vector3 startPosition;
 
