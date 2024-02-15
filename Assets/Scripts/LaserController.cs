@@ -7,10 +7,8 @@ public class LaserController : MonoBehaviour
     [Space]
     [SerializeField] int _segmentCount = 20;
     [SerializeField] int _verticesPerSegment = 5;
-    [SerializeField] float _radius = 1;
     [SerializeField] Material _material = null;
     [Space]
-    [SerializeField] float3 _lissajous = (float3)1;
     [SerializeField] float3 _palette1 = (float3)0.1f;
     [SerializeField] float3 _palette2 = (float3)1;
     [Space]
@@ -19,6 +17,7 @@ public class LaserController : MonoBehaviour
     [SerializeField] float _noiseAmplitude = 0.01f;
     [Space]
     [SerializeField] Light _lightPrefab = null;
+    public Vector3 target;
 
     Vector3 [] _vertices;
     Color [] _colors;
@@ -40,8 +39,10 @@ public class LaserController : MonoBehaviour
         _colors = new Color [vcount];
 
         // Initial vertex positions
-        for (var i = 0; i < _vertices.Length; i++)
-            _vertices[i] = math.sin(_lissajous * i / -60.0f) * _radius;
+        for (var i = 0; i < _vertices.Length; i++) {
+            float j = i / (float)(_vertices.Length - 1);
+            _vertices[i] = transform.InverseTransformPoint(Vector3.Lerp(transform.position, target, j));
+        }
 
         // Index array
         var indices = new int [_vertices.Length];
@@ -52,7 +53,7 @@ public class LaserController : MonoBehaviour
         _mesh.vertices = _vertices;
         _mesh.colors = _colors;
         _mesh.SetIndices(indices, MeshTopology.LineStrip, 0);
-        _mesh.bounds = new Bounds(Vector3.zero, Vector3.one * 1000);
+        _mesh.bounds = new Bounds(Vector3.zero, Vector3.one * 2000);
 
         // Light source array
         _lights = new GameObject [_segmentCount];
@@ -67,10 +68,14 @@ public class LaserController : MonoBehaviour
         var t = Time.time;
         var dt = Time.deltaTime;
 
-        // Cord animation
-        for (var i = 0; i < _vertices.Length - 1; i++)
+        for (var i = 0; i < _vertices.Length; i++) {
+            float j = i / (float)(_vertices.Length - 1);
+            _vertices[i] = transform.InverseTransformPoint(Vector3.Lerp(transform.position, target, j));
+        }
+
+        for (var i = 1; i < _vertices.Length - 1; i++)
         {
-            var p = (float3)_vertices[i + 1];
+            var p = (float3)_vertices[i];
 
             // Noise field position and offsets
             var np = p * _noiseFrequency;
@@ -87,9 +92,8 @@ public class LaserController : MonoBehaviour
             _vertices[i] = p + dfn * dt * _noiseAmplitude;
         }
 
-        // Head animation (Lissajous curve)
-        _vertices[_vertices.Length - 1] = math.sin(_lissajous * t) * _radius;
-
+        _vertices[_vertices.Length - 1] = transform.InverseTransformPoint(target);
+        
         // Coloring
         for (var i = 0; i < _vertices.Length; i++)
         {

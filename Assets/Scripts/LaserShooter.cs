@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tweens;
 
-public class EyeShooter : MonoBehaviour
+public class LaserShooter : MonoBehaviour
 {
     public GameObject _prefab = null;
     public float delayMin = 1f;
     public float delayMax = 1f;
+    public float timeMin = 5f;
+    public float timeMax = 10f;
 
-    // Start is called before the first frame update
     void Start()
     {
         ScheduleNextEvent();
+    }
+
+    void Update()
+    {
+
     }
 
     void ScheduleNextEvent()
@@ -24,13 +30,12 @@ public class EyeShooter : MonoBehaviour
     void PerformScheduledEvent()
     {
         var laser = Instantiate(_prefab, transform);
-        laser.AddTween(new PositionTween {
-            to = Camera.main.transform.position,
-            duration = 3f,
-            onEnd = (instance) => {
-                Destroy(laser);
-            }
-        });
+        var laserController = laser.GetComponent<LaserController>();
+        if (laserController) {
+            laserController.target = Camera.main.transform.position;
+            laserController.target.y = 0.5f;
+        }
+        Destroy(laser, Random.Range(timeMin, timeMax));
         ScheduleNextEvent();
     }
 

@@ -46,12 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _segmentCount: 20
   _verticesPerSegment: 5
-  _radius: 1
   _material: {fileID: 2100000, guid: 23e18b9e57a3b17408ee8c7ec3e5fab0, type: 2}
-  _lissajous:
-    x: 1
-    y: 1
-    z: 1
   _palette1:
     x: 1
     y: 0
@@ -62,6 +57,7 @@ MonoBehaviour:
     z: 0
   _noiseFrequency: 0.5
   _noiseMotion: 0.5
-  _noiseAmplitude: 0.01
+  _noiseAmplitude: 0.3
   _lightPrefab: {fileID: 8701441817187180526, guid: 480b3d67fcccdba44a7fa93f3b65579d,
     type: 3}
+  target: {x: 0, y: 0, z: 0}
