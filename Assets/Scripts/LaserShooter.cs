@@ -10,6 +10,7 @@ public class LaserShooter : MonoBehaviour
     public float delayMax = 1f;
     public float timeMin = 5f;
     public float timeMax = 10f;
+    public GameObject target;
 
     void Start()
     {
@@ -32,8 +33,10 @@ public class LaserShooter : MonoBehaviour
         var laser = Instantiate(_prefab, transform);
         var laserController = laser.GetComponent<LaserController>();
         if (laserController) {
-            laserController.target = Camera.main.transform.position;
-            laserController.target.y = 0.5f;
+            laserController.target = target.transform.position;
+            if (target.CompareTag("Player") || target.CompareTag("MainCamera")) {
+                laserController.target.y -= 0.25f;
+            }
         }
         Destroy(laser, Random.Range(timeMin, timeMax));
         ScheduleNextEvent();

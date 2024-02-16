@@ -2141,6 +2141,7 @@ MonoBehaviour:
   delayMax: 6
   timeMin: 1
   timeMax: 3
+  target: {fileID: 1022030758}
 --- !u!1 &463429890
 GameObject:
   m_ObjectHideFlags: 0
