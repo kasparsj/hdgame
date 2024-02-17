@@ -36,16 +36,15 @@ public class FieldController : AudioManager, ILightController
     {
         base.Start();
 
-        for (var i = 0; i < 14; i++)
-        {
-            Light light = createLight(i, i < 7 ? _color1 : _color2);
-            _lights.Add(light);
-        }
+        // for (var i = 0; i < 14; i++)
+        // {
+        //     Light light = createLight(i, i < 7 ? _color1 : _color2);
+        //     _lights.Add(light);
+        // }
     }
 
-    Light createLight(int index, Color color)
+    Light createLight(int index, Color color, Vector3 pos)
     {
-        var pos = getPosition(index);
         var go = Instantiate(_prefab, transform);
         go.transform.localPosition = pos;
         go.transform.localRotation = Quaternion.identity;
@@ -57,9 +56,9 @@ public class FieldController : AudioManager, ILightController
             lightManager.color = color;
             lightManager.intensity = _intensity;
         }
-        if (audioSources.Length > index) {
-            audioSources[index].gameObject.transform.localPosition = pos;
-        }
+        // if (audioSources.Length > index) {
+        //     audioSources[index].gameObject.transform.localPosition = pos;
+        // }
         return light;
     }
 
@@ -124,5 +123,32 @@ public class FieldController : AudioManager, ILightController
         lightManager.toggleCord(false);
         lightManager.toggleSphere(false);
         lightManager.toggleBars(true);
+    }
+
+    public void initEye() {
+        var hd = GameObject.Find("hd");
+        var eye = hd.transform.Find("eye");
+        if (eye) {
+            eye.gameObject.SetActive(true);
+            StartCoroutine(ScheduleAction(1f, () => {
+                var laserShooter = eye.GetComponentInChildren<LaserShooter>();
+                if (laserShooter) {
+                    laserShooter.shoot(new Vector3(0, 0, 0), 7f);
+                }
+                StartCoroutine(ScheduleAction(7f, () => {
+                    createLight(0, _color2, new Vector3(0, 0, 0));
+                    var posOsc = eye.GetComponent<OscPositionX>();
+                    if (posOsc) {
+                        posOsc.startOsc();
+                    }
+                }));
+            }));
+        }
+    }
+
+    IEnumerator ScheduleAction(float delay, System.Action action)
+    {
+        yield return new WaitForSeconds(delay);
+        action();
     }
 }

@@ -97,29 +97,47 @@ public class IntroController : AudioManager, ILightController
             to = getPosition(pos + 0.12f),
             duration = 1,
             onEnd = (instance) => {
-                var tween2 = new LocalPositionTween {
-                    to = new Vector3(0, 10, 0),
-                    duration = 5,
-                    onEnd = (instance) => {
-                        LightManager lightManager = _lights[light].GetComponent<LightManager>();
-                        lightManager.toggleCord(false);
-                        lightManager.toggleSphere(false);
-                    }
-                };
-                _lights[light].gameObject.AddTween(tween2);
+                lightToHD(light);
             }
         };
         _lights[light].gameObject.AddTween(tween);
+    }
+
+    private void lightToHD(int light) {
+        var hd = GameObject.Find("hd");
+        if (hd != null) {
+            var tween2 = new PositionTween {
+                to = hd.transform.position,
+                duration = 14,
+                onEnd = (instance) => {
+                    onEnd(light);
+                    var field = FindObjectsOfType<FieldController>()[0];
+                    field.initEye();
+                }
+            };
+            _lights[light].intensity *= 10;
+            _lights[light].range *= 10;
+            _lights[light].gameObject.AddTween(tween2);
+        }
+    }
+
+    private void onEnd(int light) {
+        Destroy(_lights[light].gameObject);
+        // LightManager lightManager = _lights[light].GetComponent<LightManager>();
+        // lightManager.toggleCord(false);
+        // lightManager.toggleSphere(false);
+
 
         for (var i=0; i<3; i++) {
+            var audioSource = audioSources[i];
             var tween3 = new AudioSourceVolumeTween {
                 to = 0,
                 duration = 3,
                 onEnd = (instance) => {
-                    audioSources[i].Stop();
+                    audioSource.Stop();
                 }
             };
-            audioSources[i].gameObject.AddTween(tween3);
+            audioSource.gameObject.AddTween(tween3);
         }
     }
 }

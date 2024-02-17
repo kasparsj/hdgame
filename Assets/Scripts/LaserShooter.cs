@@ -6,6 +6,7 @@ using Tweens;
 public class LaserShooter : MonoBehaviour
 {
     public GameObject _prefab = null;
+    public bool scheduleOnStart = false;
     public float delayMin = 1f;
     public float delayMax = 1f;
     public float timeMin = 5f;
@@ -14,7 +15,9 @@ public class LaserShooter : MonoBehaviour
 
     void Start()
     {
-        ScheduleNextEvent();
+        if (scheduleOnStart) {
+            ScheduleNextEvent();
+        }
     }
 
     void Update()
@@ -30,16 +33,22 @@ public class LaserShooter : MonoBehaviour
 
     void PerformScheduledEvent()
     {
+        Vector3 targetPos = target.transform.position;
+        if (target.CompareTag("Player") || target.CompareTag("MainCamera")) {
+            targetPos.y -= 0.25f;
+        }
+        shoot(targetPos, Random.Range(timeMin, timeMax));
+        ScheduleNextEvent();
+    }
+
+    public void shoot(Vector3 targetPos, float time)
+    {
         var laser = Instantiate(_prefab, transform);
         var laserController = laser.GetComponent<LaserController>();
         if (laserController) {
-            laserController.target = target.transform.position;
-            if (target.CompareTag("Player") || target.CompareTag("MainCamera")) {
-                laserController.target.y -= 0.25f;
-            }
+            laserController.target = targetPos;
         }
-        Destroy(laser, Random.Range(timeMin, timeMax));
-        ScheduleNextEvent();
+        Destroy(laser, time);
     }
 
 }

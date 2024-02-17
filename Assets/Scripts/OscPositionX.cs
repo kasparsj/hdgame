@@ -7,15 +7,24 @@ public class OscPositionX : MonoBehaviour
 {
     public float amplitude = 30f;
     public float speed = 3f;
-    private Vector3 startPosition;
+    public bool startOnAwake = false;
+    private Vector3? startPosition = null;
 
-    void Start()
+    void Awake()
     {
-        startPosition = transform.localPosition;
+        if (startOnAwake) {
+            startPosition = transform.localPosition;
+        }
     }
 
     void Update()
     {
-        transform.localPosition = startPosition + Vector3.right * Mathf.Sin(Time.time * speed) * amplitude;
+        if (startPosition != null) {
+            transform.localPosition = (Vector3)startPosition + Vector3.right * Mathf.Sin(Time.time * speed) * amplitude;
+        }
+    }
+
+    public void startOsc() {
+        startPosition = transform.localPosition;
     }
 }
