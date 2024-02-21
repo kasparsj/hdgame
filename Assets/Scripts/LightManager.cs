@@ -8,6 +8,7 @@ public class LightManager : MonoBehaviour
     public int index = 0;
     public Color color = new Color(1, 1, 1);
     public float intensity = 1;
+    public uint randomSeed = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,12 @@ public class LightManager : MonoBehaviour
         Transform cordTransform = transform.Find("Cord");
         if (cordTransform != null) {
             cordTransform.gameObject.SetActive(visible);
+            if (visible) {
+                var cordController = cordTransform.gameObject.GetComponent<LightCordController>();
+                if (cordController) {
+                    cordController.randomSeed = (float) randomSeed;
+                }
+            }
         }
     }
 
@@ -60,6 +67,12 @@ public class LightManager : MonoBehaviour
         Transform barsTransform = transform.Find("Bars");
         if (barsTransform != null) {
             barsTransform.gameObject.SetActive(visible);
+            if (visible) {
+                var barController = barsTransform.gameObject.GetComponentInChildren<LightBarController>();
+                if (barController) {
+                    barController.randomSeed = randomSeed;
+                }
+            }
         }
     }
 

@@ -6,7 +6,7 @@ public class LightBarController : MonoBehaviour
     [Space]
     [SerializeField] GameObject _prefab = null;
     [SerializeField] uint _instanceCount = 10;
-    [SerializeField] uint _randomSeed = 0;
+    public uint randomSeed = 0;
     [Space]
     [SerializeField] float _height = 1;
     [SerializeField] float _width = 50;
@@ -20,7 +20,7 @@ public class LightBarController : MonoBehaviour
     {
         _bars = new GameObject[_instanceCount];
 
-        var hash = new XXHash(_randomSeed);
+        var hash = new XXHash(randomSeed);
 
         for (var i = 0u; i < _instanceCount; i++)
         {
@@ -43,7 +43,7 @@ public class LightBarController : MonoBehaviour
 
     void Update()
     {
-        var hash = new XXHash(_randomSeed + 100);
+        var hash = new XXHash(randomSeed + 100);
         var t = Time.time;
 
         for (var i = 0u; i < _instanceCount; i++)

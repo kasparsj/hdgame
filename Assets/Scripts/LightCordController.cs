@@ -14,6 +14,7 @@ public class LightCordController : MonoBehaviour
     [SerializeField] float3 _palette1 = (float3)0.1f;
     [SerializeField] float3 _palette2 = (float3)1;
     [Space]
+    public float randomSeed = 0;
     [SerializeField] float _noiseFrequency = 0.5f;
     [SerializeField] float _noiseMotion = 0.5f;
     [SerializeField] float _noiseAmplitude = 0.01f;
@@ -74,8 +75,8 @@ public class LightCordController : MonoBehaviour
 
             // Noise field position and offsets
             var np = p * _noiseFrequency;
-            var offs1 = new float3(0, t * _noiseMotion - 30, 0);
-            var offs2 = new float3(t * _noiseMotion + 30, 0, 0);
+            var offs1 = new float3(0, t * _noiseMotion - 30, randomSeed);
+            var offs2 = new float3(t * _noiseMotion + 30, 0, randomSeed);
 
             // Divergence-free noise field
             float3 n1, n2;
@@ -93,7 +94,7 @@ public class LightCordController : MonoBehaviour
         // Coloring
         for (var i = 0; i < _vertices.Length; i++)
         {
-            var c = (math.sin(_palette1 * i + _palette2 * t) + 1) * 0.5f;
+            var c = (math.sin(_palette1 * i + _palette2 * t + randomSeed) + 1) * 0.5f;
             _colors[i] = new Color(c.x, c.y, c.z);
         }
 

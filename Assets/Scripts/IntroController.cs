@@ -112,7 +112,7 @@ public class IntroController : AudioManager, ILightController
                 onEnd = (instance) => {
                     onEnd(light);
                     var field = FindObjectsOfType<FieldController>()[0];
-                    field.initEye();
+                    field.init();
                 }
             };
             _lights[light].intensity *= 10;
@@ -137,7 +137,7 @@ public class IntroController : AudioManager, ILightController
                     audioSource.Stop();
                 }
             };
-            audioSource.gameObject.AddTween(tween3);
+            // audioSource.gameObject.AddTween(tween3);
         }
     }
 }
