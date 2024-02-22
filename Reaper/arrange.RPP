@@ -1,4 +1,4 @@
-<REAPER_PROJECT 0.1 "7.11/OSX64-clang" 1708450893
+<REAPER_PROJECT 0.1 "7.11/OSX64-clang" 1708556970
   <NOTES 0 2
   >
   RIPPLE 0
@@ -18,9 +18,9 @@
   VIDEO_CONFIG 0 0 256
   PANMODE 3
   PANLAWFLAGS 3
-  CURSOR 15.74803149606299
-  ZOOM 5.4351748602382 0 0
-  VZOOMEX 4.8064518 0
+  CURSOR 122.83464566929133
+  ZOOM 2.3817398529661 0 0
+  VZOOMEX 3.3187499 0
   USE_REC_CFG 0
   RECMODE 1
   SMPTESYNC 0 30 100 40 1000 300 0 0 1 0 0
@@ -32,14 +32,13 @@
   >
   <APPLYFX_CFG
   >
-  RENDER_FILE ""
-  RENDER_PATTERN ""
-  RENDER_FMT 0 2 0
+  RENDER_FILE "/Users/kasparsj/Work2/unity/hdgame/Reaper/Mixed/drone.wav"
+  RENDER_FMT 0 2 44100
   RENDER_1X 0
-  RENDER_RANGE 1 0 0 18 1000
+  RENDER_RANGE 4 0 0 0 1000
   RENDER_RESAMPLE 3 0 1
   RENDER_ADDTOPROJ 0
-  RENDER_STEMS 0
+  RENDER_STEMS 32
   RENDER_DITHER 0
   TIMELOCKMODE 1
   TEMPOENVLOCKMODE 1
@@ -62,8 +61,8 @@
   GLOBAL_AUTO -1
   TEMPO 152.4 4 4
   PLAYRATE 1 0 0.25 4
-  SELECTION 113.38582677165354 113.38582677165354
-  SELECTION2 113.38582677165354 113.38582677165354
+  SELECTION 103.93700787401575 103.93700787401575
+  SELECTION2 103.93700787401575 103.93700787401575
   MASTERAUTOMODE 0
   MASTERTRACKHEIGHT 0 0
   MASTERPEAKCOL 16576
@@ -101,7 +100,7 @@
     AUTOMODE 0
     PANLAWFLAGS 3
     VOLPAN 1 0 -1 -1 1
-    MUTESOLO 0 2 0
+    MUTESOLO 1 0 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -122,7 +121,7 @@
     <ITEM
       POSITION 0
       SNAPOFFS 0
-      LENGTH 106.69564583333333
+      LENGTH 103.93700787401575
       LOOP 1
       ALLTAKES 0
       FADEIN 1 0 0 1 0 0 0
@@ -138,7 +137,51 @@
       CHANMODE 0
       GUID {38DF4F82-C405-5643-91A6-E38782C912DE}
       <SOURCE WAVE
-        FILE "Assets/Audio/intro/intro_12.wav"
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_12.wav"
+      >
+    >
+    <ITEM
+      POSITION 103.93700787401575
+      SNAPOFFS 0
+      LENGTH 103.93700787401575
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {614B3FEC-E17C-A744-92E6-062500E3A182}
+      IID 77
+      NAME intro_12.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {E4E67469-9159-F541-8143-1BCF622FE32C}
+      <SOURCE WAVE
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_12.wav"
+      >
+    >
+    <ITEM
+      POSITION 207.8740157480315
+      SNAPOFFS 0
+      LENGTH 5.51181102362204
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {A5CEA12B-91E8-514F-BC0A-9EDFF49BAB91}
+      IID 80
+      NAME intro_12.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {F6ABA1D4-8D36-F94A-8A3A-65B71C871CD2}
+      <SOURCE WAVE
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_12.wav"
       >
     >
   >
@@ -148,8 +191,8 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 0.73270941974115 0 -1 -1 1
-    MUTESOLO 0 0 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 1 2 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -170,7 +213,7 @@
     <ITEM
       POSITION 0
       SNAPOFFS 0
-      LENGTH 106.69564583333333
+      LENGTH 58.26771653543307
       LOOP 1
       ALLTAKES 0
       FADEIN 1 0 0 1 0 0 0
@@ -186,7 +229,73 @@
       CHANMODE 0
       GUID {A75610D2-A6E0-FA4A-A550-52BB23EBFB15}
       <SOURCE WAVE
-        FILE "Assets/Audio/intro/intro_34.wav"
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_34.wav"
+      >
+    >
+    <ITEM
+      POSITION 58.26771653543307
+      SNAPOFFS 0
+      LENGTH 58.26771653543307
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {F7675135-4CB9-0349-8891-C686E5A39271}
+      IID 65
+      NAME intro_34.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {E2455075-FA15-694B-8156-9CAD7A6A5684}
+      <SOURCE WAVE
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_34.wav"
+      >
+    >
+    <ITEM
+      POSITION 116.53543307086613
+      SNAPOFFS 0
+      LENGTH 58.26771653543307
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {6E6DC486-15BE-C942-A8DB-22FA9068A887}
+      IID 66
+      NAME intro_34.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {4BE9A662-D8BB-4745-812D-A98FF9AF0285}
+      <SOURCE WAVE
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_34.wav"
+      >
+    >
+    <ITEM
+      POSITION 174.8031496062992
+      SNAPOFFS 0
+      LENGTH 38.58267716535434
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {7382B0B4-9B72-DA45-8210-1CBDBD077B3E}
+      IID 67
+      NAME intro_34.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {1DBF4F5C-0F67-E94B-9B22-36A7C2D6FC56}
+      <SOURCE WAVE
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_34.wav"
       >
     >
   >
@@ -196,15 +305,15 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 1 0 -1 -1 1
-    MUTESOLO 0 0 0
+    VOLPAN 1.15736796727037 0 -1 -1 1
+    MUTESOLO 1 0 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
     BUSCOMP 0 0 0 0 0
     SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
     FIXEDLANES 9 0 0
-    SEL 1
+    SEL 0
     REC 0 0 1 0 0 0 0 0
     VU 2
     TRACKHEIGHT 0 0 0 0 0 0 0
@@ -218,7 +327,7 @@
     <ITEM
       POSITION 0
       SNAPOFFS 0
-      LENGTH 107.08661417322834
+      LENGTH 103.93700787401575
       LOOP 1
       ALLTAKES 0
       FADEIN 1 0 0 1 0 0 0
@@ -234,7 +343,51 @@
       CHANMODE 0
       GUID {E70F3AE0-0596-7845-A7FB-DE2075F5B723}
       <SOURCE WAVE
-        FILE "Assets/Audio/intro/intro_56.wav"
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_56.wav"
+      >
+    >
+    <ITEM
+      POSITION 103.93700787401575
+      SNAPOFFS 0
+      LENGTH 103.93700787401575
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {4476724D-E01E-0B41-B38E-506315A512D9}
+      IID 78
+      NAME intro_56.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {D7276533-EDDE-2E46-BDC6-2C69BB1118AB}
+      <SOURCE WAVE
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_56.wav"
+      >
+    >
+    <ITEM
+      POSITION 207.8740157480315
+      SNAPOFFS 0
+      LENGTH 5.51181102362204
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {A88108EB-A93B-4043-BA37-7BB3A3FAD155}
+      IID 79
+      NAME intro_56.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {C5D48D5F-317D-DA40-B284-2CB9233451F1}
+      <SOURCE WAVE
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/intro_56.wav"
       >
     >
   >
@@ -244,8 +397,8 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 1 0 -1 -1 1
-    MUTESOLO 0 2 0
+    VOLPAN 1.39288064923275 0 -1 -1 1
+    MUTESOLO 1 2 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -282,7 +435,7 @@
       CHANMODE 0
       GUID {01D847A3-B6E2-6E4F-AD70-2726AEA85137}
       <SOURCE WAVE
-        FILE "Assets/Audio/intro/wind-distant.wav"
+        FILE "/Users/kasparsj/Work2/unity/hdgame/Assets/Audio/intro/wind-distant.wav"
       >
     >
   >
@@ -292,8 +445,8 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 0.30902659488464 0 -1 -1 1
-    MUTESOLO 0 0 0
+    VOLPAN 0.35372574155057 0 -1 -1 1
+    MUTESOLO 1 2 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -693,7 +846,7 @@
     AUTOMODE 0
     PANLAWFLAGS 3
     VOLPAN 1 0 -1 -1 1
-    MUTESOLO 0 0 0
+    MUTESOLO 1 0 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -745,8 +898,8 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 2.11188315125422 0 -1 -1 1
-    MUTESOLO 0 2 0
+    VOLPAN 1.45054756857827 0 -1 -1 1
+    MUTESOLO 1 2 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -767,7 +920,7 @@
     <ITEM
       POSITION 0
       SNAPOFFS 0
-      LENGTH 50.39370078740149
+      LENGTH 58.26771653543307
       LOOP 1
       ALLTAKES 0
       FADEIN 1 0 0 1 0 0 0
@@ -787,23 +940,67 @@
       >
     >
     <ITEM
-      POSITION 50.39370078740157
+      POSITION 58.26771653543307
       SNAPOFFS 0
-      LENGTH 162.99212598425197
+      LENGTH 58.26771653543307
       LOOP 1
       ALLTAKES 0
       FADEIN 1 0 0 1 0 0 0
       FADEOUT 1 0 0 1 0 0 0
       MUTE 0 0
       SEL 0
-      IGUID {8B94ECE3-50C7-3841-B37F-D9E80DC39050}
-      IID 30
+      IGUID {AB2F0B80-E12B-0948-9631-3BCC4794BDD0}
+      IID 68
       NAME snare.wav
       VOLPAN 1 0 1 -1
       SOFFS 0
       PLAYRATE 1 1 0 -1 0 0.0025
       CHANMODE 0
-      GUID {32E9E632-75F9-AC43-903C-C98A6840F1C9}
+      GUID {8CADFDF1-D47D-3A44-886E-CB00EDA9B90C}
+      <SOURCE WAVE
+        FILE "Media/snare.wav"
+      >
+    >
+    <ITEM
+      POSITION 116.53543307086613
+      SNAPOFFS 0
+      LENGTH 58.26771653543307
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {B7D59DE9-07A8-CA4C-A780-9BEB31849434}
+      IID 69
+      NAME snare.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {1D184656-F35B-6744-8C19-7DB23001DE42}
+      <SOURCE WAVE
+        FILE "Media/snare.wav"
+      >
+    >
+    <ITEM
+      POSITION 174.8031496062992
+      SNAPOFFS 0
+      LENGTH 38.58267716535434
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {007A0D07-554A-B34A-9F2C-A2A1CF785905}
+      IID 70
+      NAME snare.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {7EF158DF-7D55-114C-9AEC-F419F636DF6B}
       <SOURCE WAVE
         FILE "Media/snare.wav"
       >
@@ -815,8 +1012,8 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 1 0 -1 -1 1
-    MUTESOLO 0 2 0
+    VOLPAN 1.48015541418744 0 -1 -1 1
+    MUTESOLO 1 2 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -837,7 +1034,7 @@
     <ITEM
       POSITION 0
       SNAPOFFS 0
-      LENGTH 213.38582677165354
+      LENGTH 116.53543307086613
       LOOP 1
       ALLTAKES 0
       FADEIN 1 0 0 1 0 0 0
@@ -856,6 +1053,28 @@
         FILE "Media/chords.wav"
       >
     >
+    <ITEM
+      POSITION 116.53543307086613
+      SNAPOFFS 0
+      LENGTH 96.85039370078741
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {99898BF8-1A28-6343-B2C5-4FA109936216}
+      IID 71
+      NAME chords.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {E361D5B7-4545-414A-930C-AC22AA53C611}
+      <SOURCE WAVE
+        FILE "Media/chords.wav"
+      >
+    >
   >
   <TRACK {3E2A44E4-5B16-8043-9BE6-172FD72304FB}
     NAME mel2
@@ -863,8 +1082,8 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 1.45054756857827 0 -1 -1 1
-    MUTESOLO 0 0 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 1 0 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -885,7 +1104,7 @@
     <ITEM
       POSITION 0
       SNAPOFFS 0
-      LENGTH 213.38582677165354
+      LENGTH 116.53543307086613
       LOOP 1
       ALLTAKES 0
       FADEIN 1 0 0 1 0 0 0
@@ -904,6 +1123,28 @@
         FILE "Media/mel2.wav"
       >
     >
+    <ITEM
+      POSITION 116.53543307086613
+      SNAPOFFS 0
+      LENGTH 96.85039370078741
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {43C411A2-7386-5347-84C4-66176048D9E8}
+      IID 72
+      NAME mel2.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {2371543B-7824-6D4C-98B4-87FA718A55DF}
+      <SOURCE WAVE
+        FILE "Media/mel2.wav"
+      >
+    >
   >
   <TRACK {060AE1E1-5FC2-644F-ACEC-7D95577846BF}
     NAME pulse-drone
@@ -911,8 +1152,8 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 1 0 -1 -1 1
-    MUTESOLO 0 2 0
+    VOLPAN 1.39288064923275 0 -1 -1 1
+    MUTESOLO 0 0 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -961,7 +1202,7 @@
       FADEIN 1 0.01 0 1 0 0 0
       FADEOUT 1 0 0 1 0 0 0
       MUTE 0 0
-      SEL 0
+      SEL 1
       IGUID {AD45C672-4E9C-B34D-AFFD-D65D25CE1CA3}
       IID 33
       NAME pulse-drone.wav
@@ -981,15 +1222,15 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 1 0 -1 -1 1
-    MUTESOLO 0 2 0
+    VOLPAN 1.39288064923275 0 -1 -1 1
+    MUTESOLO 0 0 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
     BUSCOMP 0 0 0 0 0
     SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
     FIXEDLANES 9 0 0
-    SEL 0
+    SEL 1
     REC 0 0 1 0 0 0 0 0
     VU 2
     TRACKHEIGHT 0 0 0 0 0 0 0
@@ -1031,7 +1272,7 @@
       FADEIN 1 0.01 0 1 0 0 0
       FADEOUT 1 0 0 1 0 0 0
       MUTE 0 0
-      SEL 0
+      SEL 1
       IGUID {404FC4E2-06E8-BD41-AE61-CC9CE676FFA4}
       IID 34
       NAME sine-drone.wav
@@ -1051,8 +1292,8 @@
     BEAT -1
     AUTOMODE 0
     PANLAWFLAGS 3
-    VOLPAN 1.3648053125715 0 -1 -1 1
-    MUTESOLO 0 0 0
+    VOLPAN 1.48015541418744 0 -1 -1 1
+    MUTESOLO 1 0 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -1073,7 +1314,7 @@
     <ITEM
       POSITION 0
       SNAPOFFS 0
-      LENGTH 213.38582677165354
+      LENGTH 116.53543307086613
       LOOP 1
       ALLTAKES 0
       FADEIN 1 0 0 1 0 0 0
@@ -1088,6 +1329,28 @@
       PLAYRATE 1 1 0 -1 0 0.0025
       CHANMODE 0
       GUID {312BC8A4-94E6-9C43-93C8-0F9C9C8D0B90}
+      <SOURCE WAVE
+        FILE "Media/mel3-imported.wav"
+      >
+    >
+    <ITEM
+      POSITION 116.53543307086613
+      SNAPOFFS 0
+      LENGTH 96.85039370078741
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {D58C36D3-11E9-594D-AF27-C23945033903}
+      IID 73
+      NAME mel3-imported.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0.2963414546512
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {56030E7A-B27F-FD40-8CAF-5172D7B9CE84}
       <SOURCE WAVE
         FILE "Media/mel3-imported.wav"
       >

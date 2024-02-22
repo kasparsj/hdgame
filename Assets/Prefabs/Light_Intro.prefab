@@ -60,11 +60,44 @@ MonoBehaviour:
     x: 1.231
     y: 1.321
     z: 1.115
+  randomSeed: 0
   _noiseFrequency: 3
   _noiseMotion: 2
   _noiseAmplitude: 2
   _lightPrefab: {fileID: 8701441817187180526, guid: 480b3d67fcccdba44a7fa93f3b65579d,
     type: 3}
+--- !u!1 &6939346736081189380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6081376831080841305}
+  m_Layer: 0
+  m_Name: Bars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6081376831080841305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939346736081189380}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2161782979621582395}
+  m_Father: {fileID: 7440689405894522015}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7440689405894522014
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +132,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6081376831080841305}
   - {fileID: 7532062736324549814}
   - {fileID: 7440689406606421063}
   m_Father: {fileID: 0}
@@ -334,6 +368,7 @@ MonoBehaviour:
   index: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   intensity: 1
+  randomSeed: 0
 --- !u!111 &8734584709183075533
 Animation:
   m_ObjectHideFlags: 0
@@ -467,3 +502,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8111f798612ed4853a03959d16b241a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7891487761427466080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2161782979621582395}
+  - component: {fileID: 6417119902946966987}
+  m_Layer: 0
+  m_Name: Light Bars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2161782979621582395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891487761427466080}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6081376831080841305}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6417119902946966987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891487761427466080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68f56c47069eec4bab4d501cdcc0378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8916124662659719705, guid: 6c049dd683f9f4a72ac25c822c493073, type: 3}
+  _instanceCount: 20
+  randomSeed: 0
+  _height: 500
+  _width: 1.8
+  _speed: 100
+  _animateY: 1
+  _fixRotation: 1

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Tweens;
 
 public class AudioManager : MonoBehaviour
 {
@@ -57,9 +58,10 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator PlayAudioSources()
     {
-        foreach (var source in audioSources)
-        {
-            source.Play();
+        for (var i=0; i<audioSources.Length; i++) {
+            if (audioSources[i]) {
+                audioSources[i].Play();
+            }
         }
         yield return null;
     }
@@ -92,9 +94,57 @@ public class AudioManager : MonoBehaviour
 
     private void PauseAudioSources()
     {
-        foreach (var source in audioSources)
-        {
-            source.Pause();
+        for (var i=0; i<audioSources.Length; i++) {
+            if (audioSources[i]) {
+                audioSources[i].Pause();
+            }
         }
+    }
+
+    public void FadeIn(AudioSource audioSource, float dur = 0.5f)
+    {
+        UnmuteAudioChannel(audioSource);
+        var tween = new AudioSourceVolumeTween {
+            from = 0,
+            to = 1,
+            duration = dur,
+        };
+        audioSource.gameObject.AddTween(tween);
+    }
+
+    public void FadeOut(AudioSource audioSource, float dur = 3f)
+    {
+        var tween = new AudioSourceVolumeTween {
+            to = 0,
+            duration = dur,
+            onEnd = (instance) => {
+                // do nothing
+            }
+        };
+        audioSource.gameObject.AddTween(tween);
+    }
+
+    public void FadeOutPause(AudioSource audioSource, float dur = 3f)
+    {
+        var tween = new AudioSourceVolumeTween {
+            to = 0,
+            duration = dur,
+            onEnd = (instance) => {
+                audioSource.Pause();
+            }
+        };
+        audioSource.gameObject.AddTween(tween);
+    }
+
+    public void FadeOutStop(AudioSource audioSource, float dur = 3f)
+    {
+        var tween = new AudioSourceVolumeTween {
+            to = 0,
+            duration = dur,
+            onEnd = (instance) => {
+                audioSource.Stop();
+            }
+        };
+        audioSource.gameObject.AddTween(tween);
     }
 }

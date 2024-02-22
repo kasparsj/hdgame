@@ -9,11 +9,13 @@ public class OscPositionX : MonoBehaviour
     public float speed = 3f;
     public bool startOnAwake = false;
     private Vector3? startPosition = null;
+    private Vector3? initialPosition = null;
 
     void Awake()
     {
+        initialPosition = transform.localPosition;
         if (startOnAwake) {
-            startPosition = transform.localPosition;
+            startPosition = initialPosition;
         }
     }
 
@@ -25,6 +27,10 @@ public class OscPositionX : MonoBehaviour
     }
 
     public void startOsc() {
-        startPosition = transform.localPosition;
+        startPosition = initialPosition;
+    }
+
+    public void stopOsc() {
+        startPosition = null;
     }
 }

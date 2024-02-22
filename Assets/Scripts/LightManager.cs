@@ -9,6 +9,7 @@ public class LightManager : MonoBehaviour
     public Color color = new Color(1, 1, 1);
     public float intensity = 1;
     public uint randomSeed = 0;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,9 @@ public class LightManager : MonoBehaviour
         p.z = Time.time;
 
         var amp = math.saturate(0.5f + noise.snoise(p) * 0.7f);
+        if (audioSource) {
+            audioSource.volume = amp;
+        }
 
         var col = color;
         col = col.linear;
@@ -62,25 +66,26 @@ public class LightManager : MonoBehaviour
         }
     }
 
-    public void toggleBars(bool visible)
+    public GameObject getBars()
     {
         Transform barsTransform = transform.Find("Bars");
-        if (barsTransform != null) {
-            barsTransform.gameObject.SetActive(visible);
-            if (visible) {
-                var barController = barsTransform.gameObject.GetComponentInChildren<LightBarController>();
-                if (barController) {
-                    barController.randomSeed = randomSeed;
-                }
+        return barsTransform.gameObject;
+    }
+
+    public void toggleBars(bool visible)
+    {
+        var bars = getBars();
+        bars.SetActive(visible);
+        if (visible) {
+            var barController = bars.GetComponentInChildren<LightBarController>();
+            if (barController) {
+                barController.randomSeed = randomSeed;
             }
         }
     }
 
     public void ParentOnTriggerEnter(Collider other)
     {
-        toggleCord(true);
-        toggleSphere(false);
-
         ILightController controller = GetComponentInParent<ILightController>();
         if (controller != null) {
             GetComponentInParent<ILightController>().LightOnTriggerEnter(index, other);

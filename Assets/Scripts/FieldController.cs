@@ -1,84 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Unity.Mathematics;
 using Tweens;
 
 public class FieldController : AudioManager, ILightController
 {
     public Light _prefab = null;
-    public int minRadius = 50;
-    public int maxRadius = 450;
+    public int radius = 450;
     public float _intensity = 4000;
     public Color _color = new Color(0, 1, 0);
     private GameObject eye;
-    private Light[] _lights = new Light[7];
-    private int rotation = 0;
+    private Light[] _lights = new Light[8];
+    private int bars = 0;
 
     private Vector3 pointOnEllipse(float rad, float w, float h) {
         return new Vector3(math.cos(rad) * w / 2f, 0, math.sin(rad) * h / 2f);
     }
 
-    private int getLevel()
-    {
-        int level = 0;
-        for (var i=0; i<_lights.Length; i++) {
-            if (_lights[i] != null) {
-                level++;
-            }
-        }
-        return level;
-    }
-
     private Vector3 getPosition(int light, float radius) {
         float angle = Mathf.PI * 2f / 7f;
         // if (light < 7) {
-            return pointOnEllipse((rotation+light+0.75f) * angle, radius, radius);
+            return pointOnEllipse((light+0.75f) * angle, radius, radius);
         // }
         // else {
-            // return pointOnEllipse((light + rotation) * angle, radius, radius);
+            // return pointOnEllipse(light * angle, radius, radius);
         // }
     }
 
-    private float getRadius(int? level = null)
+    public void init()
     {
-        if (!level.HasValue) {
-            level = getLevel();
-        }
-        float perc = 1.0f - ((int) level / (float) _lights.Length);
-        return minRadius + (maxRadius - minRadius) * perc;
-    }
-
-    private Vector3 getLevelPosition(int light, int? level = null) {
-        return getPosition(light, getRadius(level));
-    }
-
-    public void init() {
-        var hdGO = GameObject.Find("hd");
-        eye = hdGO.transform.Find("eye").gameObject;
-        if (eye) {
-            eye.SetActive(true);
-            StartCoroutine(ScheduleAction(1f, () => {
-                shootLightAt(findFreeIndex(), 3f, 2);
-                StartCoroutine(ScheduleAction(3f, () => {
-                    shootLightAt(findFreeIndex(), 3f, 2);
-                    StartCoroutine(ScheduleAction(7f, () => {
-                        drawPath(2);
-                        var posOsc = eye.GetComponent<OscPositionX>();
-                        if (posOsc) {
-                            posOsc.startOsc();
-                        }
-                    }));
-                }));
-            }));
-        }
+        var index = 0;
+        _lights[index] = createLight(index, _color, new Vector3(0, 0, 0));
+        startChords(index);
     }
 
     void Start()
     {
-        base.Start();
+        //init();
 
-        init();
+        base.Start();
     }
 
     Light createLight(int index, Color color, Vector3 pos)
@@ -109,138 +71,206 @@ public class FieldController : AudioManager, ILightController
     public void LightOnTriggerEnter(int index, Collider other)
     {
         if (_lights[index] == null) return;
-        if (allLights()) {
-            finish();
-            return;
-        }
-        //playAudioSource(index);
 
-        int target = getMoveIndex(index);
-        Debug.Log(index + "/" + target);
-        if (target > -1) {
-            swapLight(index, target);
-            //rotation = rotation + (UnityEngine.Random.Range(0, 2) * 2 - 1);
-            int nextLevel = getLevel() + 1;
-            tweenToPosition(5f, getRadius(nextLevel), (Light light) => {
-                LightManager lightManager = light.GetComponent<LightManager>();
-                lightManager.toggleCord(false);
-                lightManager.toggleSphere(true);
-            });
-            StartCoroutine(ScheduleAction(5f, () => {
-                shootLightAt(findFreeIndex(), 5f, nextLevel);
-                drawPath(nextLevel);
-            }));
-        }
-        else {
-            Debug.Log("Destroy " + index);
-            Destroy(_lights[index].gameObject);
-            _lights[index] = null;
-        }
-    }
-
-    void drawPath(int level)
-    {
-        var pathGO = GameObject.Find("path");
-        if (pathGO) {
-            var pathDrawer = pathGO.GetComponent<PathDrawer>();
-            if (pathDrawer) {
-                //pathDrawer.clearPath();
-                //pathDrawer.drawPath(getRadius(level));
-            }
-        }
-    }
-
-    void swapLight(int index, int target)
-    {
         var light = _lights[index];
-        _lights[target] = light;
         LightManager lightManager = light.GetComponent<LightManager>();
-        lightManager.index = target;
-        _lights[index] = null;
+        if (lightManager) {
+            lightManager.toggleSphere(false);
+        }
+        switch (index) {
+            case 0:
+                audioSources[index].spatialBlend = 0f;
+                // hh
+                FadeIn(audioSources[11]);
+                startEye();
+                var delay = UnityEngine.Random.Range(15f, 30f);
+                FadeOut(audioSources[index], delay);
+                StartCoroutine(ScheduleAction(delay, () => {
+                    lightManager.toggleBars(false);
+                    startLaser();
+                }));
+                break;
+            default:
+                toggleMelodies();
+                audioSources[index].spatialBlend = 0f;
+                togglePercs();
+                if (lightManager) {
+                    lightManager.toggleBars(true);
+                    bars++;
+                    if (bars >= 6) {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+
+                }
+                break;
+        }
     }
 
-    bool allLights()
+    private void startChords(int light) {
+        LightManager lightManager = _lights[light].GetComponent<LightManager>();
+        lightManager.toggleCord(false);
+        lightManager.toggleSphere(true);
+        lightManager.toggleBars(true);
+
+        FadeIn(audioSources[light]);
+    }
+
+    private void startLaser(float dur = 10f) {
+        pauseEye();
+        shootLightAt(findFreeIndex(), dur);
+        StartCoroutine(ScheduleAction(dur, () => {
+            startEye();
+            if (countFree() > 0) {
+                var delay = UnityEngine.Random.Range(45f, 90f);
+                StartCoroutine(ScheduleAction(delay, () => {
+                    startLaser(UnityEngine.Random.Range(3.5f, 7f));
+                }));
+            }
+        }));
+    }
+
+    int findNonSpatialIndex()
     {
-        for (var i=0; i<_lights.Length; i++) {
-            if (_lights[i] == null) {
-                return false;
+        int i;
+        do {
+            i = UnityEngine.Random.Range(1, 8);
+        }
+        while (audioSources[i].spatialBlend != 0f);
+        return i;
+    }
+
+    int countNonSpatial()
+    {
+        var count = 0;
+        for (var i=1; i<8; i++) {
+            if (audioSources[i].spatialBlend == 0f) {
+                count++;
             }
         }
-        return true;
-    }
-
-    void finish()
-    {
-        tweenToPosition(5f, 450, (Light light) => {
-            LightManager lightManager = light.GetComponent<LightManager>();
-            lightManager.toggleCord(false);
-            lightManager.toggleSphere(false);
-            lightManager.toggleBars(true);
-        });
-    }
-
-    private void playAudioSource(int light) {
-        if (audioSources.Length > light) {
-            UnmuteAudioChannel(audioSources[light]);
-            var tween = new AudioSourceVolumeTween {
-                from = 0,
-                to = 1,
-                duration = 0.5f,
-            };
-            audioSources[light].gameObject.AddTween(tween);
-        }
-    }
-
-    private void tweenToPosition(float dur, float radius, System.Action<Light> callback) {
-        for (var i=0; i<_lights.Length; i++) {
-            var light = _lights[i];
-            if (!light) continue;
-            LightManager lightManager = light.GetComponent<LightManager>();
-            lightManager.toggleCord(true);
-            lightManager.toggleSphere(false);
-            var to = getPosition(i, radius);
-            var tween = new LocalPositionTween {
-                to = to,
-                duration = dur,
-                onEnd = (instance) => {
-                    callback(light);           
-                }
-            };
-            light.gameObject.AddTween(tween);
-        }
-    }
-
-    int getMoveIndex(int index)
-    {
-        var i = (index + 3) % 7;
-        if (_lights[i] == null) {
-            return i;
-        }
-        return -1;
+        return count;
     }
 
     int findFreeIndex()
     {
+        if (countFree() == 1) {
+            return 7;
+        }
         int i = -1;
-        if (_lights.Length > 0) {
+        if (_lights.Length > 0 && countFree() > 0) {
             do {
-                i = UnityEngine.Random.Range(0, _lights.Length);
+                i = UnityEngine.Random.Range(1, _lights.Length-1);
             }
             while (_lights[i] != null);
         }
         return i;
     }
 
-    void shootLightAt(int index, float dur, int? level = null)
+    int countFree()
     {
-        var pos = getLevelPosition(index, level);
+        int free = 0;
+        for (var i=1; i<_lights.Length; i++) {
+            if (_lights[i] == null) free++;
+        }
+        return free;
+    }
+
+    private void startEye() {
+        var hdGO = GameObject.Find("hd");
+        eye = hdGO.transform.Find("eye").gameObject;
+        if (eye) {
+            eye.SetActive(true);
+            var posOsc = eye.GetComponent<OscPositionX>();
+            if (posOsc) {
+                posOsc.startOsc();
+            }
+        }
+    }
+
+    private void pauseEye()
+    {
+        var posOsc = eye.GetComponent<OscPositionX>();
+        if (posOsc) {
+            posOsc.stopOsc();
+        }
+    }
+
+    void shootLightAt(int index, float dur)
+    {
+        var pos = getPosition(index, radius);
         var laserShooter = eye.GetComponentInChildren<LaserShooter>();
         if (laserShooter) {
             laserShooter.shoot(pos, dur);
         }
-        StartCoroutine(ScheduleAction(dur - 0.5f, () => {
-            _lights[index] = createLight(index, _color, pos);
+        StartCoroutine(ScheduleAction(dur - 1f, () => {
+            var light = createLight(index, _color, pos);
+            _lights[index] = light;
+            var nextSource = audioSources[index];
+            nextSource.gameObject.transform.position = light.gameObject.transform.position;
+            FadeIn(nextSource);
         }));
+    }
+
+    void toggleMelodies()
+    {
+        if (countNonSpatial() == 0) {
+            return;
+        }
+        var numPlaying = 0;
+        for (var i=1; i<8; i++) {
+            if (audioSources[i].spatialBlend == 0f && audioSources[i].volume > 0f) {
+                numPlaying++;
+            }
+        }
+        var index = findNonSpatialIndex();
+        if (numPlaying == 0) {
+            FadeIn(audioSources[index], 3f);
+        }
+        else if (numPlaying >= 2) {
+            FadeOut(audioSources[index], 3f);
+        }
+        else {
+            if (audioSources[index].volume > 0f) {
+                FadeOut(audioSources[index], 3f);
+            }
+            else {
+                FadeIn(audioSources[index], 3f);
+            }
+        }
+    }
+
+    void togglePercs()
+    {
+        if (countNonSpatial() <= 2) {
+            var rnd = UnityEngine.Random.Range(0, 2) == 1 ? 10 : 12;
+            if (audioSources[rnd].isPlaying) {
+                rnd = rnd == 10 ? 12 : 10;
+            }
+            FadeIn(audioSources[rnd]);
+        }
+        else {
+            var numPlaying = 0;
+            for (var i=10; i<13; i++) {
+                if (audioSources[i].volume > 0f) {
+                    numPlaying++;
+                }
+            }
+            var index = UnityEngine.Random.Range(10, 13);
+            var percSource = audioSources[index];
+            if (numPlaying == 0) {
+                FadeIn(percSource);
+            }
+            else if (numPlaying == 3) {
+                FadeOut(percSource);
+            }
+            else {
+                if (percSource.volume == 0f) {
+                    FadeIn(percSource);
+                }
+                else {
+                    FadeOut(percSource);
+                }
+            }
+        }
     }
 
     IEnumerator ScheduleAction(float delay, System.Action action)

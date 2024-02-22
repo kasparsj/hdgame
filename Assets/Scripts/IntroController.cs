@@ -7,12 +7,13 @@ using Tweens;
 public class IntroController : AudioManager, ILightController
 {
     public Light prefab = null;
-    public int radius = 50;
-    public int radius2 = 55;
+    public int radius1 = 468;
+    public int radius2 = 515;
     public float intensity = 1;
-    public Color color = new Color(1, 1, 1);
+    public Color color = new Color(0, 0, 1);
     private List<Light> _lights = new List<Light>();
     private float pos = 0;
+    private GameObject eye;
 
     private Vector3 pointOnEllipse(float rad, float w, float h) {
         return new Vector3(math.cos(rad) * w / 2, math.sin(rad) * h / 2);
@@ -20,7 +21,7 @@ public class IntroController : AudioManager, ILightController
 
     private Vector3 getPosition(float p) {
         if ((p - Mathf.Floor(p)) < 0.2f) {
-            return pointOnEllipse(Mathf.PI * 2 / 7 * p, radius, radius);
+            return pointOnEllipse(Mathf.PI * 2 / 7 * p, radius1, radius1);
         }
         return pointOnEllipse(Mathf.PI * 2 / 7 * p, radius2, radius2);
     }
@@ -28,21 +29,7 @@ public class IntroController : AudioManager, ILightController
     void Start()
     {
         base.Start();
-
-        var go = Instantiate(prefab, transform);
-        go.transform.localPosition = getPosition(pos);
-        go.transform.localRotation = Quaternion.identity;
-
-        Light light = go.GetComponent<Light>();
-        LightManager lightManager = light.GetComponent<LightManager>();
-        if (lightManager != null) {
-            lightManager.color = color;
-            lightManager.intensity = intensity;
-        }
-        else {
-            Debug.Log("LightManager not found");
-        }
-        _lights.Add(light);
+        _lights.Add(createLight(_lights.Count, color));
     }
 
     void Update()
@@ -50,23 +37,46 @@ public class IntroController : AudioManager, ILightController
         base.Update();
     }
 
+    private Light createLight(int index, Color color)
+    {
+        var go = Instantiate(prefab, transform);
+        go.transform.localPosition = getPosition(pos);
+        go.transform.localRotation = Quaternion.identity;
+
+        Light light = go.GetComponent<Light>();
+        LightManager lightManager = light.GetComponent<LightManager>();
+        if (lightManager != null) {
+            lightManager.index = index;
+            lightManager.color = color;
+            lightManager.intensity = intensity;
+        }
+        return light;
+    }
+
     public void LightOnTriggerEnter(int light, Collider other)
     {
+        var lightManager = _lights[light].GetComponent<LightManager>();
         var index = (int) pos;
-        if (audioSources[index]) {
-            UnmuteAudioChannel(audioSources[index]);
-            var tween = new AudioSourceVolumeTween {
-                from = 0,
-                to = 1,
-                duration = 0.5f,
-            };
-            audioSources[index].gameObject.AddTween(tween);
-        }
-        if (index == audioSources.Length-1) {
-            introComplete(light);
-        }
-        else {
-            tweenToNextPosition(light);
+        switch (index) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                if (lightManager) {
+                    lightManager.toggleCord(true);
+                    lightManager.toggleSphere(false);
+                }
+                if (audioSources[index]) {
+                    FadeIn(audioSources[index]);
+                    //audioSources[index].gameObject.transform.parent = _lights[light].gameObject.transform;
+                }
+                if (index == 3) {
+                    introComplete(light);
+                }
+                else {
+                    tweenToNextPosition(light);
+                }
+                break;
         }
     }
 
@@ -74,12 +84,12 @@ public class IntroController : AudioManager, ILightController
         pos += 0.5f;
         var tween = new LocalPositionTween {
             to = getPosition(pos + 0.1f),
-            duration = 4,
+            duration = 5,
             onEnd = (instance) => {
                 pos += 0.5f;
                 var tween2 = new LocalPositionTween {
                     to = getPosition(pos),
-                    duration = 4,
+                    duration = 5,
                     onEnd = (instance) => {
                         LightManager lightManager = _lights[light].GetComponent<LightManager>();
                         lightManager.toggleCord(false);
@@ -97,47 +107,32 @@ public class IntroController : AudioManager, ILightController
             to = getPosition(pos + 0.12f),
             duration = 1,
             onEnd = (instance) => {
-                lightToHD(light);
+                pos += 1f;
+                lightToCenter(light);
             }
         };
         _lights[light].gameObject.AddTween(tween);
     }
 
-    private void lightToHD(int light) {
-        var hd = GameObject.Find("hd");
-        if (hd != null) {
-            var tween2 = new PositionTween {
-                to = hd.transform.position,
-                duration = 14,
-                onEnd = (instance) => {
-                    onEnd(light);
-                    var field = FindObjectsOfType<FieldController>()[0];
-                    field.init();
-                }
-            };
-            _lights[light].intensity *= 10;
-            _lights[light].range *= 10;
-            _lights[light].gameObject.AddTween(tween2);
-        }
+    private void lightToCenter(int light) {
+        var tween = new LocalPositionTween {
+            to = new Vector3(0, 0, 0),
+            duration = 7,
+            onEnd = (instance) => {
+                onEnd(light);
+            }
+        };
+        _lights[light].gameObject.AddTween(tween);
     }
 
     private void onEnd(int light) {
         Destroy(_lights[light].gameObject);
-        // LightManager lightManager = _lights[light].GetComponent<LightManager>();
-        // lightManager.toggleCord(false);
-        // lightManager.toggleSphere(false);
-
 
         for (var i=0; i<3; i++) {
-            var audioSource = audioSources[i];
-            var tween3 = new AudioSourceVolumeTween {
-                to = 0,
-                duration = 3,
-                onEnd = (instance) => {
-                    audioSource.Stop();
-                }
-            };
-            // audioSource.gameObject.AddTween(tween3);
+            FadeOutStop(audioSources[i]);
         }
+
+        var field = FindObjectsOfType<FieldController>()[0];
+        field.init();
     }
 }
