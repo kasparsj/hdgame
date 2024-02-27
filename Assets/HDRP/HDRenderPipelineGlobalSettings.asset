@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultVolumeProfile: {fileID: 11400000, guid: b2d0875051128aa45b2231c0326d4d94,
     type: 2}
-  m_LookDevVolumeProfile: {fileID: 0}
+  m_LookDevVolumeProfile: {fileID: 11400000, guid: 98602295e65bb4f60aa74b2c52f709d1,
+    type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
-      data1: 140666621394765
-      data2: 4539628434053070872
+      data1: 140666587840333
+      data2: 13763000512783810584
     lodBias: 1
     lodBiasMode: 0
     lodBiasQualityLevel: 0
@@ -32,8 +33,8 @@ MonoBehaviour:
     materialQuality: 0
   m_RenderingPathDefaultBakedOrCustomReflectionFrameSettings:
     bitDatas:
-      data1: 135310787769165
-      data2: 4539628424389459992
+      data1: 135310754214733
+      data2: 13763000499898974232
     lodBias: 1
     lodBiasMode: 0
     lodBiasQualityLevel: 0
@@ -47,8 +48,8 @@ MonoBehaviour:
     materialQuality: 0
   m_RenderingPathDefaultRealtimeReflectionFrameSettings:
     bitDatas:
-      data1: 139923425337165
-      data2: 4539628424657895448
+      data1: 139923391782733
+      data2: 13763000465807638544
     lodBias: 1
     lodBiasMode: 0
     lodBiasQualityLevel: 0
@@ -86,66 +87,19 @@ MonoBehaviour:
   decalLayerName7: Decal Layer 7
   lensAttenuationMode: 0
   colorGradingSpace: 0
-  m_ObsoleteDiffusionProfileSettingsList:
-  - {fileID: 11400000, guid: 149fa912036fc064ebe95c75b411d140, type: 2}
-  - {fileID: 11400000, guid: 49925c7ed10534c48a8ee14d8657521d, type: 2}
+  m_ObsoleteDiffusionProfileSettingsList: []
   rendererListCulling: 0
   DLSSProjectId: 000000
   useDLSSCustomProjectId: 0
   supportProbeVolumes: 0
-  supportRuntimeDebugDisplay: 1
-  autoRegisterDiffusionProfiles: 0
+  supportRuntimeDebugDisplay: 0
+  autoRegisterDiffusionProfiles: 1
   apvScenesData:
     serializedBounds: []
-    serializedHasVolumes:
-    - sceneGUID: 17a65341f2851954ba98782ec0407760
-      hasProbeVolumes: 0
-    serializedProfiles:
-    - sceneGUID: 17a65341f2851954ba98782ec0407760
-      profile: {fileID: 11400000, guid: ee8ea622b88104d79a10a4bc20401ac9, type: 2}
-    serializedBakeSettings:
-    - sceneGUID: 17a65341f2851954ba98782ec0407760
-      settings:
-        m_Version: 1
-        dilationSettings:
-          enableDilation: 1
-          dilationDistance: 1
-          dilationValidityThreshold: 0.25
-          dilationIterations: 1
-          squaredDistWeighting: 1
-        virtualOffsetSettings:
-          useVirtualOffset: 1
-          outOfGeoOffset: 0.01
-          searchMultiplier: 0.2
-          rayOriginBias: -0.001
-          maxHitsPerRay: 10
-          collisionMask:
-            serializedVersion: 2
-            m_Bits: 4294967291
-    serializedBakingSets:
-    - name: New Baking Set
-      sceneGUIDs:
-      - 17a65341f2851954ba98782ec0407760
-      settings:
-        m_Version: 1
-        dilationSettings:
-          enableDilation: 1
-          dilationDistance: 1
-          dilationValidityThreshold: 0.25
-          dilationIterations: 1
-          squaredDistWeighting: 1
-        virtualOffsetSettings:
-          useVirtualOffset: 1
-          outOfGeoOffset: 0.01
-          searchMultiplier: 0.2
-          rayOriginBias: -0.001
-          maxHitsPerRay: 10
-          collisionMask:
-            serializedVersion: 2
-            m_Bits: 4294967291
-      profile: {fileID: 11400000, guid: ee8ea622b88104d79a10a4bc20401ac9, type: 2}
-      lightingScenarios:
-      - Default
+    serializedHasVolumes: []
+    serializedProfiles: []
+    serializedBakeSettings: []
+    serializedBakingSets: []
     m_LightingScenario: Default
   m_Version: 5
   m_ShaderVariantLogLevel: 0

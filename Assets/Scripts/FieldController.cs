@@ -115,7 +115,7 @@ public class FieldController : AudioManager, ILightController
         FadeIn(audioSources[light]);
     }
 
-    private void startLaser(float dur = 10f) {
+    private void startLaser(float dur = 7f) {
         pauseEye();
         shootLightAt(findFreeIndex(), dur);
         StartCoroutine(ScheduleAction(dur, () => {
