@@ -11,6 +11,9 @@ public class IntroController : AudioManager, ILightController
     public int radius2 = 515;
     public float intensity = 1;
     public Color color = new Color(0, 0, 1);
+    public Camera camera;
+    public LayerMask introMask;
+
     private List<Light> _lights = new List<Light>();
     private float pos = 0;
     private GameObject eye;
@@ -28,6 +31,7 @@ public class IntroController : AudioManager, ILightController
 
     void Start()
     {
+        camera.cullingMask = introMask;
         base.Start();
         _lights.Add(createLight(_lights.Count, color));
     }
@@ -71,6 +75,7 @@ public class IntroController : AudioManager, ILightController
                     //audioSources[index].gameObject.transform.parent = _lights[light].gameObject.transform;
                 }
                 if (index == 3) {
+                    camera.cullingMask = -1;
                     introComplete(light);
                 }
                 else {

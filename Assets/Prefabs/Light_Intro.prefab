@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7532062736324549814}
   - component: {fileID: 5130828120743469782}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cord
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6081376831080841305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 7440689405894522012}
   - component: {fileID: 488913135135448288}
   - component: {fileID: 8734584709183075533}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light_Intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,6 +369,7 @@ MonoBehaviour:
   color: {r: 0, g: 0, b: 0, a: 0}
   intensity: 1
   randomSeed: 0
+  audioSource: {fileID: 0}
 --- !u!111 &8734584709183075533
 Animation:
   m_ObjectHideFlags: 0
@@ -397,7 +398,7 @@ GameObject:
   - component: {fileID: 7440689406606421061}
   - component: {fileID: 4711065927246586374}
   - component: {fileID: 794860274331089480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2161782979621582395}
   - component: {fileID: 6417119902946966987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light Bars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
