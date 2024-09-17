@@ -18159,7 +18159,7 @@ MonoBehaviour:
   prefab: {fileID: 7440689405894522010, guid: 2007ce09ccc874d7f8cf65a5a0ca25ab, type: 3}
   radius1: 468
   radius2: 515
-  intensity: 400
+  intensity: 4000
   color: {r: 0, g: 0, b: 1, a: 1}
   camera: {fileID: 991386666}
   introMask:

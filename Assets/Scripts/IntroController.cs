@@ -120,11 +120,23 @@ public class IntroController : AudioManager, ILightController
     }
 
     private void lightToCenter(int light) {
+        var dest = new Vector3(0, 3, 0);
+        var mid = Vector3.Lerp(dest, _lights[light].gameObject.transform.localPosition, 0.5f);
+        mid.z = -20;
         var tween = new LocalPositionTween {
-            to = new Vector3(0, 3, 0),
-            duration = 7,
+            to = mid,
+            duration = 4,
             onEnd = (instance) => {
-                onEnd(light);
+                var tween2 = new LocalPositionTween
+                {
+                    to = dest,
+                    duration = 4,
+                    onEnd = (instance) =>
+                    {
+                        onEnd(light);
+                    }
+                };
+                _lights[light].gameObject.AddTween(tween2);
             }
         };
         _lights[light].gameObject.AddTween(tween);

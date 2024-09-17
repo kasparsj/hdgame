@@ -207,7 +207,7 @@ public class FieldController : AudioManager, ILightController
     {
         //var pos = getPosition(index, radius);
         var pos = Camera.main.transform.position;
-        pos = new Vector3(pos.x, pos.y-0.25f, pos.z);
+        pos = new Vector3(pos.x, pos.y-0.1f, pos.z);
         var laserShooter = eye.GetComponentInChildren<LaserShooter>();
         if (laserShooter) {
             laserShooter.shoot(pos, dur);
