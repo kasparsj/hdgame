@@ -32,7 +32,7 @@ public class FieldController : AudioManager, ILightController
     public void init()
     {
         var index = 0;
-        _lights[index] = createLight(index, _color, new Vector3(0, 0, 0));
+        _lights[index] = createLight(index, _color, new Vector3(0, 3, 0));
         startChords(index);
     }
 
@@ -81,7 +81,8 @@ public class FieldController : AudioManager, ILightController
             case 0:
                 audioSources[index].spatialBlend = 0f;
                 // hh
-                FadeIn(audioSources[11]);
+                //FadeIn(audioSources[9]);
+
                 startEye();
                 var delay = UnityEngine.Random.Range(15f, 30f);
                 FadeOut(audioSources[index], delay);
@@ -117,15 +118,18 @@ public class FieldController : AudioManager, ILightController
 
     private void startLaser(float dur = 7f) {
         pauseEye();
-        shootLightAt(findFreeIndex(), dur);
+        shootLightAt(0, dur);
+        //shootLightAt(findFreeIndex(), dur);
         StartCoroutine(ScheduleAction(dur, () => {
-            startEye();
-            if (countFree() > 0) {
-                var delay = UnityEngine.Random.Range(45f, 90f);
-                StartCoroutine(ScheduleAction(delay, () => {
-                    startLaser(UnityEngine.Random.Range(3.5f, 7f));
-                }));
-            }
+            // todo: next level
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //startEye();
+            //if (countFree() > 0) {
+            //    var delay = UnityEngine.Random.Range(45f, 90f);
+            //    StartCoroutine(ScheduleAction(delay, () => {
+            //        startLaser(UnityEngine.Random.Range(3.5f, 7f));
+            //    }));
+            //}
         }));
     }
 
@@ -184,6 +188,11 @@ public class FieldController : AudioManager, ILightController
                 posOsc.startOsc();
             }
         }
+        var fpCtrl = GameObject.Find("First Person Controller");
+        fpCtrl.GetComponent<FirstPersonMovement>().enabled = false;
+        fpCtrl.GetComponent<Jump>().enabled = false;
+        fpCtrl.GetComponent<Crouch>().enabled = false;
+        fpCtrl.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
     }
 
     private void pauseEye()
@@ -196,18 +205,20 @@ public class FieldController : AudioManager, ILightController
 
     void shootLightAt(int index, float dur)
     {
-        var pos = getPosition(index, radius);
+        //var pos = getPosition(index, radius);
+        var pos = Camera.main.transform.position;
+        pos = new Vector3(pos.x, pos.y-0.25f, pos.z);
         var laserShooter = eye.GetComponentInChildren<LaserShooter>();
         if (laserShooter) {
             laserShooter.shoot(pos, dur);
         }
-        StartCoroutine(ScheduleAction(dur - 1f, () => {
-            var light = createLight(index, _color, pos);
-            _lights[index] = light;
-            var nextSource = audioSources[index];
-            nextSource.gameObject.transform.position = light.gameObject.transform.position;
-            FadeIn(nextSource);
-        }));
+        //StartCoroutine(ScheduleAction(dur - 1f, () => {
+        //    var light = createLight(index, _color, pos);
+        //    _lights[index] = light;
+        //    var nextSource = audioSources[index];
+        //    nextSource.gameObject.transform.position = light.gameObject.transform.position;
+        //    FadeIn(nextSource);
+        //}));
     }
 
     void toggleMelodies()

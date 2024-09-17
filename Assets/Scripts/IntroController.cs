@@ -121,7 +121,7 @@ public class IntroController : AudioManager, ILightController
 
     private void lightToCenter(int light) {
         var tween = new LocalPositionTween {
-            to = new Vector3(0, 0, 0),
+            to = new Vector3(0, 3, 0),
             duration = 7,
             onEnd = (instance) => {
                 onEnd(light);

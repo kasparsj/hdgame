@@ -6734,7 +6734,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 636619.75
+  m_Intensity: 6366.1978
   m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6796,7 +6796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 40000000
+  m_Intensity: 400000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -8116,11 +8116,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 687180947, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1773623360729482, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_Name
       value: First Person Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773623360729482, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1773623360729482, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_TagString
@@ -8198,7 +8202,7 @@ PrefabInstance:
     - target: {fileID: 20437472682476688, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
       propertyPath: m_FocalLength
-      value: 20.784609
+      value: 20.78461
       objectReference: {fileID: 0}
     - target: {fileID: 20437472682476688, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
@@ -8223,12 +8227,22 @@ PrefabInstance:
     - target: {fileID: 114497868231759342, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114497868231759342, guid: 11aaea5348574644a9eb4f4504fcce3f,
+        type: 3}
+      propertyPath: jumpStrength
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114503055206606986, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
       propertyPath: isGrounded
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114503055206606986, guid: 11aaea5348574644a9eb4f4504fcce3f,
+        type: 3}
+      propertyPath: distanceThreshold
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 114762042097486276, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
@@ -8238,7 +8252,7 @@ PrefabInstance:
     - target: {fileID: 114963311885979670, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
       propertyPath: speed
-      value: 10
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 114963311885979670, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
@@ -8248,7 +8262,12 @@ PrefabInstance:
     - target: {fileID: 114963311885979670, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
       propertyPath: runSpeed
-      value: 20
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114963311885979670, guid: 11aaea5348574644a9eb4f4504fcce3f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 136877096903737240, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
@@ -8263,7 +8282,7 @@ PrefabInstance:
     - target: {fileID: 7262903598032256510, guid: 11aaea5348574644a9eb4f4504fcce3f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17608,8 +17627,6 @@ MonoBehaviour:
   - {fileID: 989336452}
   - {fileID: 1381173729}
   - {fileID: 655209176}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 328516235}
   - {fileID: 1295035003}
   - {fileID: 291266278}
@@ -18142,7 +18159,7 @@ MonoBehaviour:
   prefab: {fileID: 7440689405894522010, guid: 2007ce09ccc874d7f8cf65a5a0ca25ab, type: 3}
   radius1: 468
   radius2: 515
-  intensity: 100
+  intensity: 400
   color: {r: 0, g: 0, b: 1, a: 1}
   camera: {fileID: 991386666}
   introMask:
