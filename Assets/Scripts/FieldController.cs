@@ -15,6 +15,8 @@ public class FieldController : AudioManager, ILightController
     private Light[] _lights = new Light[8];
     private int bars = 0;
 
+    public AudioSource eyeSound;
+
     private Vector3 pointOnEllipse(float rad, float w, float h) {
         return new Vector3(math.cos(rad) * w / 2f, 0, math.sin(rad) * h / 2f);
     }
@@ -84,12 +86,12 @@ public class FieldController : AudioManager, ILightController
                 //FadeIn(audioSources[9]);
 
                 startEye();
-                var delay = UnityEngine.Random.Range(15f, 30f);
-                FadeOut(audioSources[index], delay);
-                StartCoroutine(ScheduleAction(delay, () => {
-                    lightManager.toggleBars(false);
-                    startLaser();
-                }));
+                //var delay = UnityEngine.Random.Range(15f, 30f);
+                //FadeOut(audioSources[index], delay);
+                //StartCoroutine(ScheduleAction(delay, () => {
+                //    lightManager.toggleBars(false);
+                //    startLaser();
+                //}));
                 break;
             default:
                 toggleMelodies();
@@ -116,21 +118,28 @@ public class FieldController : AudioManager, ILightController
         FadeIn(audioSources[light]);
     }
 
-    private void startLaser(float dur = 7f) {
-        pauseEye();
-        shootLightAt(0, dur);
-        //shootLightAt(findFreeIndex(), dur);
-        StartCoroutine(ScheduleAction(dur, () => {
-            // todo: next level
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            //startEye();
-            //if (countFree() > 0) {
-            //    var delay = UnityEngine.Random.Range(45f, 90f);
-            //    StartCoroutine(ScheduleAction(delay, () => {
-            //        startLaser(UnityEngine.Random.Range(3.5f, 7f));
-            //    }));
-            //}
-        }));
+    public void startLaser(float dur = 10f) {
+        if (eye)
+        {
+            LightManager lightManager = _lights[0].GetComponent<LightManager>();
+            lightManager.toggleBars(false);
+
+            pauseEye();
+            shootLightAt(0, dur);
+            //shootLightAt(findFreeIndex(), dur);
+            StartCoroutine(ScheduleAction(dur, () =>
+            {
+                // todo: next level
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                //startEye();
+                //if (countFree() > 0) {
+                //    var delay = UnityEngine.Random.Range(45f, 90f);
+                //    StartCoroutine(ScheduleAction(delay, () => {
+                //        startLaser(UnityEngine.Random.Range(3.5f, 7f));
+                //    }));
+                //}
+            }));
+        }
     }
 
     int findNonSpatialIndex()
@@ -179,6 +188,7 @@ public class FieldController : AudioManager, ILightController
     }
 
     private void startEye() {
+        eyeSound.Play();
         var hdGO = GameObject.Find("hd");
         eye = hdGO.transform.Find("eye").gameObject;
         if (eye) {
@@ -193,6 +203,16 @@ public class FieldController : AudioManager, ILightController
         fpCtrl.GetComponent<Jump>().enabled = false;
         fpCtrl.GetComponent<Crouch>().enabled = false;
         fpCtrl.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+
+        ScheduleAction(5f, () => {
+            var pos = fpCtrl.transform.position;
+            var tween = new PositionTween
+            {
+                to = new Vector3(pos.x, pos.y + 200, pos.z),
+                duration = 90f,
+            };
+            fpCtrl.AddTween(tween);
+        });
     }
 
     private void pauseEye()
@@ -207,7 +227,7 @@ public class FieldController : AudioManager, ILightController
     {
         //var pos = getPosition(index, radius);
         var pos = Camera.main.transform.position;
-        pos = new Vector3(pos.x, pos.y-0.1f, pos.z);
+        pos = new Vector3(pos.x, pos.y, pos.z);
         var laserShooter = eye.GetComponentInChildren<LaserShooter>();
         if (laserShooter) {
             laserShooter.shoot(pos, dur);

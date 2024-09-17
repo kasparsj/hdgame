@@ -18,6 +18,8 @@ public class IntroController : AudioManager, ILightController
     private float pos = 0;
     private GameObject eye;
 
+    public AudioSource[] impactSounds;
+
     private Vector3 pointOnEllipse(float rad, float w, float h) {
         return new Vector3(math.cos(rad) * w / 2, math.sin(rad) * h / 2);
     }
@@ -69,6 +71,10 @@ public class IntroController : AudioManager, ILightController
                 if (lightManager) {
                     lightManager.toggleCord(true);
                     lightManager.toggleSphere(false);
+                }
+                if (impactSounds[index]) {
+                    impactSounds[index].Play();
+                    impactSounds[index].gameObject.transform.parent = _lights[light].gameObject.transform;
                 }
                 if (audioSources[index]) {
                     FadeIn(audioSources[index]);
@@ -151,5 +157,22 @@ public class IntroController : AudioManager, ILightController
 
         var field = FindObjectsOfType<FieldController>()[0];
         field.init();
+
+        StartCoroutine(RunInterval(1f));
+    }
+
+    IEnumerator RunInterval(float interval)
+    {
+        var field = FindObjectsOfType<FieldController>()[0];
+        while (true)
+        {
+            int secs = (int)audioSources[3].time;
+            if (secs == 90 || secs == 180)
+            {
+                field.startLaser();
+            }
+
+            yield return new WaitForSeconds(interval);
+        }
     }
 }
