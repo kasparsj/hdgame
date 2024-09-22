@@ -192,7 +192,7 @@ public class FieldController : AudioManager, ILightController
         var hdGO = GameObject.Find("hd");
         eye = hdGO.transform.Find("eye").gameObject;
         if (eye) {
-            eye.SetActive(true);
+            StartCoroutine(FlashEye(30));
             var posOsc = eye.GetComponent<OscPositionX>();
             if (posOsc) {
                 posOsc.startOsc();
@@ -220,6 +220,23 @@ public class FieldController : AudioManager, ILightController
         var posOsc = eye.GetComponent<OscPositionX>();
         if (posOsc) {
             posOsc.stopOsc();
+        }
+    }
+
+    IEnumerator FlashEye(int numTimes)
+    {
+        var hdGO = GameObject.Find("hd");
+        eye = hdGO.transform.Find("eye").gameObject;
+        var i = 0;
+
+        while (true)
+        {
+            eye.SetActive(!eye.active);
+            if (i >= numTimes && eye.active) {
+                yield break;
+            }
+            i++;
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.25f));
         }
     }
 
