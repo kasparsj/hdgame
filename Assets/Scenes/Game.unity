@@ -6927,7 +6927,7 @@ MonoBehaviour:
   delayMax: 6
   timeMin: 1
   timeMax: 3
-  target: {fileID: 1022030758}
+  target: {fileID: 2076741159}
 --- !u!1 &444354306
 GameObject:
   m_ObjectHideFlags: 0
@@ -19534,6 +19534,12 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &2076741159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1773623360729482, guid: 11aaea5348574644a9eb4f4504fcce3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 991386665}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2116807115
 GameObject:
   m_ObjectHideFlags: 0
