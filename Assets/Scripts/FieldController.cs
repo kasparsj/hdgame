@@ -249,8 +249,8 @@ public class FieldController : AudioManager, ILightController
 
         while (true)
         {
-            eye.SetActive(!eye.active);
-            if (i >= numTimes && eye.active) {
+            eye.SetActive(!eye.activeSelf);
+            if (i >= numTimes && eye.activeSelf) {
                 yield break;
             }
             i++;

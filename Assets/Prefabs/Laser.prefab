@@ -185,9 +185,9 @@ MonoBehaviour:
     x: 1
     y: 0
     z: 0
-  _noiseFrequency: 0.5
-  _noiseMotion: 0.5
-  _noiseAmplitude: 0.3
+  _noiseFrequency: 3
+  _noiseMotion: 3
+  _noiseAmplitude: 2
   _lightPrefab: {fileID: 8701441817187180526, guid: 480b3d67fcccdba44a7fa93f3b65579d,
     type: 3}
   target: {x: 0, y: 0, z: 0}
