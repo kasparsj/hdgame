@@ -1,5 +1,10 @@
 # Homo Deus - game - level 1
 
+## Requirements
+
+- Unity 2022.3.19f1
+- HDRP (high definition render pipeline)
+
 ## Binaries
 
 Mac version:
