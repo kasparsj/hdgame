@@ -16,6 +16,7 @@ public class FieldController : AudioManager, ILightController
     private int bars = 0;
 
     public AudioSource eyeSound;
+    Vector3 playerPos;
 
     private Vector3 pointOnEllipse(float rad, float w, float h) {
         return new Vector3(math.cos(rad) * w / 2f, 0, math.sin(rad) * h / 2f);
@@ -204,15 +205,32 @@ public class FieldController : AudioManager, ILightController
         fpCtrl.GetComponent<Crouch>().enabled = false;
         fpCtrl.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
-        ScheduleAction(5f, () => {
-            var pos = fpCtrl.transform.position;
-            var tween = new PositionTween
-            {
-                to = new Vector3(pos.x, pos.y + 200, pos.z),
-                duration = 90f,
-            };
-            fpCtrl.AddTween(tween);
-        });
+        var pos = fpCtrl.transform.position;
+        var tween = new PositionTween
+        {
+            delay = 5,
+            to = new Vector3(pos.x, pos.y + 200, pos.z),
+            duration = 90f,
+            onStart = (instance) => {
+                LightManager lightManager = _lights[0].GetComponent<LightManager>();
+                lightManager.toggleSphere(false);
+                lightManager.toggleBars(false);
+
+                for (int i = 0; i < 7; i++)
+                {
+                    var pos = getPosition(i, radius);
+                    var light = createLight(i, _color, pos);
+                    lightManager = light.GetComponent<LightManager>();
+                    lightManager.toggleCord(false);
+                    lightManager.toggleSphere(false);
+                    lightManager.toggleBars(true);
+                }
+            },
+            onUpdate = (instance, value) => {
+                playerPos = value;
+            },
+        };
+        fpCtrl.AddTween(tween);
     }
 
     private void pauseEye()
@@ -243,7 +261,9 @@ public class FieldController : AudioManager, ILightController
     void shootLightAt(int index, float dur)
     {
         //var pos = getPosition(index, radius);
-        var pos = Camera.main.transform.position;
+        //var pos = GameObject.Find("First Person Controller").transform.position;
+        //var pos = Camera.main.transform.position;
+        var pos = playerPos;
         pos = new Vector3(pos.x, pos.y, pos.z);
         var laserShooter = eye.GetComponentInChildren<LaserShooter>();
         if (laserShooter) {

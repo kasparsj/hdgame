@@ -48,6 +48,11 @@ public class LaserShooter : MonoBehaviour
         if (laserController) {
             laserController.target = targetPos;
         }
+        else
+        {
+            laserController = laser.GetComponentInChildren<LaserController>();
+            laserController.target = targetPos;
+        }
         Destroy(laser, time);
     }
 

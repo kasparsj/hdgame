@@ -68,6 +68,8 @@ public class LaserController : MonoBehaviour
         var t = Time.time;
         var dt = Time.deltaTime;
 
+        target = Camera.main.transform.position;
+
         for (var i = 0; i < _vertices.Length; i++) {
             float j = i / (float)(_vertices.Length - 1);
             _vertices[i] = transform.InverseTransformPoint(Vector3.Lerp(transform.position, target, j));
@@ -92,8 +94,8 @@ public class LaserController : MonoBehaviour
             _vertices[i] = p + dfn * dt * _noiseAmplitude;
         }
 
-        _vertices[_vertices.Length - 1] = transform.InverseTransformPoint(target);
-        
+        //_vertices[_vertices.Length - 1] = transform.InverseTransformPoint(target);
+
         // Coloring
         for (var i = 0; i < _vertices.Length; i++)
         {

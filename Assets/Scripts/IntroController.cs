@@ -167,7 +167,7 @@ public class IntroController : AudioManager, ILightController
         while (true)
         {
             int secs = (int)audioSources[3].time;
-            if (secs == 90 || secs == 180)
+            if (secs == 75 || secs == 150)
             {
                 field.startLaser();
             }
